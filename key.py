@@ -1,0 +1,2 @@
+apiKey_id = "6QRCDB3CSMY4RYA8JA92O2DJK"
+apiKey_secret = "41SOzwh+OT8A+jWAvz+2t7cIUcZ6ojUOzWD3B2ETF5U"
