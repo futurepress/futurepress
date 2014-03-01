@@ -1,0 +1,42 @@
+   {% block nav %}
+    <div class="navbar-wrapper">
+      <div class="container">
+
+        <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">FUTUREPRESS</a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="{{ url_for('index') }}">Discover</a></li>
+                <li><a href="{{ url_for('makers') }}">Content makers</a></li>
+                <li><a href="{{ url_for('readers') }}">Readers</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Our Thinking<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Open source commitment</a></li>
+                    <li><a href="#">Philosophy</a></li>
+                    <li><a href="#">Made by artists for artists</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Future work</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <form class="navbar-form">
+                    <input type="text" class="form-control" placeholder="Search...">
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
