@@ -16,6 +16,8 @@ from flask.ext.stormpath import (StormpathManager,
 from key import ( apiKey_id, apiKey_secret )
 from stormpath.error import Error as StormpathError
 
+from test.data import books
+
 # grabs folder where the script runs
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -91,7 +93,6 @@ def makers():
 @app.route('/readers')
 def readers():
     return render_template('readers.html')
-
 
 @app.route('/add', methods=['POST'])
 @login_required
