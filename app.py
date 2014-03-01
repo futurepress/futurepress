@@ -74,11 +74,15 @@ def close_db(error):
 def index():
     """Searches the database for entries, then displays them"""
     entries = db.session.query(models.Flaskr)
+    app.logger.debug(request.endpoint)
     return render_template('index.html')
 
-@app.route('/bookpage')
-def bookpage():
-    return render_template('bookpage.html')
+@app.route('/books/<int:book_id>')
+def bookpage(book_id):
+    if book_id:
+        return render_template('bookpage.html', book=books[book_id])
+
+    return redirect(url_for('index'))
 
 @app.route('/copyright')
 def copyright():
