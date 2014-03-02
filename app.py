@@ -4,7 +4,6 @@ from flask import (Flask, request, session, g,
                     redirect, url_for, abort,
                     render_template, flash, jsonify
                 )
-from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.stormpath import (StormpathManager,
                                 User,
                                 login_required,
@@ -16,11 +15,7 @@ from flask.ext.stormpath import (StormpathManager,
 from key import ( apiKey_id, apiKey_secret )
 from stormpath.error import Error as StormpathError
 
-from test.data import books
-
-# grabs folder where the script runs
-basedir = os.path.abspath(os.path.dirname(__file__))
-
+TESTING = True
 DATABASE = 'flaskr.db'
 DEBUG = True
 SECRET_KEY = 'my_precious'
@@ -30,69 +25,48 @@ STORMPATH_API_KEY_ID = apiKey_id
 STORMPATH_API_KEY_SECRET = apiKey_secret
 STORMPATH_APPLICATION = 'flask-stormpath-sample'
 
-# define full path for db
-DATABASE_PATH = os.path.join(basedir, DATABASE)
+# grabs folder where the script runs
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+if TESTING:
+    DATABASE_PATH = os.path.join(basedir, 'test.db')
+else:
+    # define full path for db
+    DATABASE_PATH = os.path.join(basedir, DATABASE)
 
 # the database uri
-SQLALCHEMY_DATABASE_URI ='sqlite:///' + DATABASE_PATH
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_PATH
 
 app = Flask(__name__)
 app.config.from_object(__name__)
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
 stormpath_manager = StormpathManager(app)
 stormpath_manager.login_view = '.login'
 
-import models
-
-# connect to database
-"""def connect_db():
-    rv = sqlite3.connect(app.config['DATABASE'])
-    rv.row_factory = sqlite3.Row
-    return rv"""
-
-# create the database
-"""def init_db():
-    with app.app_context():
-        db = get_db()
-        with app.open_resource('schema.sql', mode='r') as f:
-            db.cursor().executescript(f.read())
-        db.commit()"""
-
-# open db connection
-"""def get_db():
-    if not hasattr(g, 'sqlite_db'):
-        g.sqlite_db = connect_db()
-    return g.sqlite_db"""
-
-# close database connection
-"""@app.teardown_appcontext
-def close_db(error):
-    if hasattr(g, 'sqlite_db'):
-        g.sqlite_db.close()"""
+from models import db, Book
+from db_create import createTestDB
 
 @app.route('/')
 def index():
     """Searches the database for entries, then displays them"""
-    entries = db.session.query(models.Flaskr)
-    app.logger.debug(request.endpoint)
+    #entries = db.session.query(models.Flaskr)
     return render_template('index.html')
 
-@app.route('/books/<int:book_id>')
+@app.route('/book/<int:book_id>')
 def bookpage(book_id):
     if book_id:
-        return render_template('bookpage.html', book=books[book_id])
-
+        book = Book.query.get(book_id)
+        if book:
+            return render_template('bookpage.html', book=book)
     return redirect(url_for('index'))
 
 @app.route('/copyright')
 def copyright():
     return render_template('copyright.html')
 
-
 @app.route('/makers')
 def makers():
     return render_template('makers.html')
-
 
 @app.route('/readers')
 def readers():
@@ -107,7 +81,7 @@ def add_entry():
         abort(401)
     """
 
-    new_entry = models.Flaskr(request.form['title'], request.form['text'])
+    #new_entry = models.Flaskr(request.form['title'], request.form['text'])
     db.session.add(new_entry)
     db.session.commit()
     flash('New entry was successfully posted')
@@ -121,7 +95,7 @@ def delete_entry():
     post_id = request.form['post_id']
     try:
 
-        db.session.query(models.Flaskr).filter_by(post_id=post_id).delete()
+        #db.session.query(models.Flaskr).filter_by(post_id=post_id).delete()
         db.session.commit()
         result = { 'status': 1, 'message': 'Post Deleted' }
         flash('Post {} was successfully deleted'.format(str(post_id)))
@@ -204,5 +178,12 @@ def delete_user():
     return redirect(url_for('index'))
 
 if __name__ == "__main__":
-    #init_db()
+
+    db.init_app(app)
+
+    if not os.path.isfile("test.db"):
+        print "No Test Database found, creating..."
+        with app.app_context():
+            createTestDB(db)
+
     app.run()
