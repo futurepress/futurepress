@@ -24,10 +24,12 @@ class Book(db.Model):
 
     book_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
-    author = db.Column(db.String, nullable=False)
     publisher = db.Column(db.String, nullable=False)
     cover_large = db.Column(db.String, nullable=False)
     cover_thumb = db.Column(db.String, nullable=False)
+
+    author_id = db.Column(db.Integer, db.ForeignKey('author.author_id'))
+
     #genres = ["Fiction","Romance"]
 
     def __init__(self, title, author, publisher, cover_large, cover_thumb):
@@ -47,3 +49,19 @@ class Book(db.Model):
 
     def __repr__(self):
         return '<title {}>'.format(self.title)
+
+class Author(db.Model):
+
+    __tablename__ = 'author'
+
+    author_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    books = db.relationship('Book', backref='author',
+                                lazy='dynamic')
+
+
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return '<author {}>'.format(self.name)

@@ -43,13 +43,15 @@ app.config.from_object(__name__)
 stormpath_manager = StormpathManager(app)
 stormpath_manager.login_view = '.login'
 
-from models import db, Book
+from models import db, Book, Author
 from db_create import createTestDB
 
 @app.route('/')
 def index():
     """Searches the database for entries, then displays them"""
     #entries = db.session.query(models.Flaskr)
+    author = Author.query.get(2)
+    app.logger.debug(author.books.all())
     return render_template('index.html')
 
 @app.route('/book/<int:book_id>')
@@ -58,6 +60,14 @@ def bookpage(book_id):
         book = Book.query.get(book_id)
         if book:
             return render_template('bookpage.html', book=book)
+    return redirect(url_for('index'))
+
+@app.route('/author/<int:author_id>')
+def authorpage(author_id):
+    if author_id:
+        author = Author.query.get(author_id)
+        if author:
+            return render_template('authorpage.html', author=author)
     return redirect(url_for('index'))
 
 @app.route('/copyright')
