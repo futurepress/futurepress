@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="container featurette topofpage">
+      <div class="row">
+        <div class="col-md-9 col-md-offset-1">
+          <h2 class="featurette-heading">{{ author.name }}</h2>
+        </div>
+      </div>
+        <hr class="featurette-divider">
+        <!-- FOOTER -->
+        {% include 'footer.html' %}
+    </div> <!-- /container -->
+{% endblock %}

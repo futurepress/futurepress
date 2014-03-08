@@ -4,12 +4,14 @@
     <div class="container featurette topofpage">
       <div class="row">
         <div class="col-md-4 col-md-offset-1">
-          <img class="featurette-image img-responsive" src="/{{ book.cover_large }}" alt="Generic placeholder image">
+          <img class="featurette-image img-responsive"
+               {% if book.cover_large %} src="/{{ book.cover_large }}" {% else %}
+                data-src="holder.js/500x750/auto" {% endif %} alt="Generic placeholder image">
         </div>
         <div class="col-md-7">
           <h2 class="featurette-heading">{{ book.title }}</h2>
           <h4>Author</h4>
-          <p>{{ book.author }}</p>
+          <p>{{ book.author.name }}</p>
           <h4>Publisher</h4>
           <p>{{ book.publisher }}</p>
         </div>
