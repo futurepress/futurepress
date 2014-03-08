@@ -13,3 +13,8 @@
  .mainmenu {
  	margin-right: 15px !important;
  }
+
+ .cover_thumb {
+    max-height: 200px;
+    max-width: 200px;
+ }
