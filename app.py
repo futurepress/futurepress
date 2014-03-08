@@ -1,4 +1,5 @@
 import os
+import sys, getopt
 import sqlite3
 from flask import (Flask, request, session, g,
                     redirect, url_for, abort,
@@ -191,9 +192,16 @@ if __name__ == "__main__":
 
     db.init_app(app)
 
-    if not os.path.isfile("test.db"):
-        print "No Test Database found, creating..."
-        with app.app_context():
-            createTestDB(db)
+    args = sys.argv
+    if args[1] == 'test':
+        if not os.path.isfile("test.db"):
+            print "test.db not found, creating..."
+            with app.app_context():
+                createTestDB(db)
+        else:
+            os.remove("test.db")
+            print "Removing test.db and recreating..."
+            with app.app_context():
+                createTestDB(db)
 
     app.run()
