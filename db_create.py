@@ -12,12 +12,12 @@ def createTestDB(db):
 
     # load authors
     for author_data in authors:
-        db.session.add(Author(author_data['name']))
+        db.session.add(Author.author_from_dict(**author_data))
     db.session.commit()
 
     # load books
     for book_data in books:
         book_data['author'] = Author.query.filter_by(name=book_data['author']).first()
-        db.session.add(Book.book_from_kwargs(**book_data))
+        db.session.add(Book.book_from_dict(**book_data))
     # commit the changes
     db.session.commit()

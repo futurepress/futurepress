@@ -11,7 +11,7 @@
         <div class="col-md-7">
           <h2 class="featurette-heading">{{ book.title }}</h2>
           <h4>Author</h4>
-          <p>{{ book.author.name }}</p>
+          <p><a href="/author/{{ book.author.author_id }}">{{ book.author.name }}</a></p>
           <h4>Publisher</h4>
           <p>{{ book.publisher }}</p>
         </div>
