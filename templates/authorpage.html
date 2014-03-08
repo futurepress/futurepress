@@ -2,12 +2,46 @@
 
 {% block body %}
     <div class="container featurette topofpage">
-      <div class="row">
-        <div class="col-md-9 col-md-offset-1">
-          <h2 class="featurette-heading">{{ author.name }}</h2>
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h1>{{ author.name }}</h1>
+          <p class="lead">Jake Hartnell was raised in the suburban sprawl of Chicago in a very conservative evangelical Christian family. After becoming disillusioned with his faith, he ran away to England to attend the University of Manchester and help found the record label Superstar Destroyer and his band Unconscious Jungle. After numerous adventures + hardships he journeyed across the seas yet again to come to UC Berkeley, where he studies computer science, Internet economics, digital publishing technology, and whatever else interests him. He currently works as a developer and product manager at Hypothes.is (a non-profit tech company working with web annotation), but is also a contributor to the open source project Epub.js, writer, and musician. He has already begun work on his next book entitled "How to become a better Christian by becoming an Atheist (and Visa Versa)."</p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" data-src="holder.js/400x400/auto" alt="Generic placeholder image">
         </div>
       </div>
-        <hr class="featurette-divider">
+
+      <div class="details">
+        Website: www.jakehartnell.com
+        Email: 
+        Twitter: @JakeHartnell
+        Facebook:
+        Instagram:
+        Pintrest: 
+      </div>
+
+          <ul>
+            {% for book in author.books %}
+              <li class="">
+                <img src="/{{book.cover_thumb}}">
+                <h3 class=""><a href="/book/{{book.book_id}}">{{ book.title }}</a></h3>
+                <p>Book description. Blah blah, blah..</p>
+                <p>Price</p>
+                <p>Reviews</p>
+                <p>Genres and categories</p>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      
+      <div class="press">
+        <h1>Press</h1>
+        <p>This is an optional widget that allows authors to quote/cite their latest reviews from blogs, magazines, etc. around the web.</p>
+      </div>
+
+      <hr class="featurette-divider">
         <!-- FOOTER -->
         {% include 'footer.html' %}
     </div> <!-- /container -->
