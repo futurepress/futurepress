@@ -1,29 +1,22 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <div class="container featurette topofpage">
-      <div class="row featurette">
+    <div class="container topofpage">
+      <div class="row authorbio"> 
         <div class="col-md-7">
           <h1>{{ author.name }}</h1>
           <p class="lead">{{ author.bio }}</p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-responsive"
+          <img class="authorphoto img-responsive"
                {% if author.picture %} src="/{{ author.picture }}" {% else %}
                 data-src="holder.js/400x400/auto" {% endif %} alt="Generic placeholder image">
         </div>
       </div>
+      
+      <hr class="featurette-divider">
 
-      <div class="row details">
-        Website: {{ author.website }}
-        Blog: {{ author.blog }}
-        Email: 
-        Twitter: {{ author.twitter_id }}
-        Facebook:
-        Instagram:
-        Pintrest: 
-      </div>
-
+      <div class="booklist">
           <ul>
             {% for book in author.books %}
               <li class="">
@@ -36,12 +29,24 @@
               </li>
             {% endfor %}
           </ul>
+      </div>
 
-      <div class="row press">
+<!--       <div class="row press">
         <h1>Press</h1>
         <p>This is an optional widget that allows authors to quote/cite their latest reviews from blogs, magazines, etc. around the web.</p>
       </div>
+
+      <div class="row details">
+        Website: {{ author.website }}
+        Blog: {{ author.blog }}
+        Email: 
+        Twitter: {{ author.twitter_id }}
+        Facebook:
+        Instagram:
+        Pintrest: 
+      </div> -->
+
     <!-- FOOTER -->
     {% include 'footer.html' %}
-    </div> <!-- /container -->
+    </div><!-- /container -->
 {% endblock %}

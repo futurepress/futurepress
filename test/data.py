@@ -48,6 +48,20 @@ books = [
       'cover_large': "",
       'cover_thumb': "static/images/23rdcenturyromance.thumb.jpg"
     },
+    { 'title': "How to become a better Christian by becoming an Atheist (and visa versa)",
+      'author': "Jake Hartnell",
+      'publisher': "Self",
+      'genres': ["Non-Fiction", "Religion", "Atheism", "Spirituality", "Comedy"],
+      'cover_large': "",
+      'cover_thumb': "static/images/Raptor_Jesus_by_DangermouseDavs.jpg"
+    },
+    { 'title': "Blood",
+      'author': "Jake Hartnell",
+      'publisher': "Self",
+      'genres': ["Sci-fi", "Evolution", "Fiction"],
+      'cover_large': "",
+      'cover_thumb': "static/images/1658.jpg"
+    },
 ]
 
 authors = [
