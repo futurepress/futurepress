@@ -1,0 +1,297 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/*
+ * ------------ from carousel.css needs to be sassed ------
+ *
+ */
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+/* line 15, ../sass/screen.scss */
+body {
+  padding-bottom: 40px;
+  color: #5a5a5a;
+}
+
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+/* line 26, ../sass/screen.scss */
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+}
+
+/* Flip around the padding for proper display in narrow viewports */
+/* line 35, ../sass/screen.scss */
+.navbar-wrapper .container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* line 39, ../sass/screen.scss */
+.navbar-wrapper .navbar {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+/* Carousel base class */
+/* line 49, ../sass/screen.scss */
+.carousel {
+  height: 500px;
+  margin-bottom: 60px;
+}
+
+/* Since positioning the image, we need to help out the caption */
+/* line 54, ../sass/screen.scss */
+.carousel-caption {
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+/* line 59, ../sass/screen.scss */
+.carousel .item {
+  height: 500px;
+  background-color: #777;
+}
+
+/* line 63, ../sass/screen.scss */
+.carousel-inner > .item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 500px;
+}
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+/* Pad the edges of the mobile views a bit */
+/* line 77, ../sass/screen.scss */
+.marketing {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Center align the text within the three columns below the carousel */
+/* line 83, ../sass/screen.scss */
+.marketing .col-lg-4 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* line 87, ../sass/screen.scss */
+.marketing h2 {
+  font-weight: normal;
+}
+
+/* line 90, ../sass/screen.scss */
+.marketing .col-lg-4 p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Featurettes
+------------------------- */
+/* line 99, ../sass/screen.scss */
+.featurette-divider {
+  margin: 80px 0;
+  /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+/* line 104, ../sass/screen.scss */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+@media (min-width: 768px) {
+  /* Remove the edge padding needed for mobile */
+  /* line 118, ../sass/screen.scss */
+  .marketing {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Navbar positioning foo */
+  /* line 124, ../sass/screen.scss */
+  .navbar-wrapper {
+    margin-top: 20px;
+  }
+
+  /* line 127, ../sass/screen.scss */
+  .navbar-wrapper .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* line 131, ../sass/screen.scss */
+  .navbar-wrapper .navbar {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* The navbar becomes detached from the top, so we round the corners */
+  /* line 137, ../sass/screen.scss */
+  .navbar-wrapper .navbar {
+    border-radius: 4px;
+  }
+
+  /* Bump up size of carousel content */
+  /* line 142, ../sass/screen.scss */
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  /* line 148, ../sass/screen.scss */
+  .featurette-heading {
+    font-size: 50px;
+  }
+}
+@media (min-width: 992px) {
+  /* line 155, ../sass/screen.scss */
+  .featurette-heading {
+    margin-top: 120px;
+  }
+}
+/*
+* ------------ end carousel.css ------
+*
+*/
+/*
+ * ---- FuturePress SASS ----
+ */
+/*
+ * Sign In Page
+ */
+/* line 5, ../sass/_login.scss */
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+/* line 11, ../sass/_login.scss */
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+
+/* line 14, ../sass/_login.scss */
+.form-signin .checkbox {
+  font-weight: normal;
+}
+
+/* line 17, ../sass/_login.scss */
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* line 26, ../sass/_login.scss */
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+
+/* line 29, ../sass/_login.scss */
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* line 34, ../sass/_login.scss */
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/*
+ * Register Page
+ */
+/* line 42, ../sass/_login.scss */
+.form-register {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+/* line 48, ../sass/_login.scss */
+.form-register .form-register-heading,
+.form-register {
+  margin-bottom: 10px;
+}
+
+/* line 51, ../sass/_login.scss */
+.form-register {
+  font-weight: normal;
+}
+
+/* line 54, ../sass/_login.scss */
+.form-register .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/*
+ * -- Main Styles --
+ */
+/* line 175, ../sass/screen.scss */
+.topofpage {
+  margin-top: 80px;
+}
+
+/* line 179, ../sass/screen.scss */
+.pull-right {
+  float: right !important;
+}
+
+/* line 183, ../sass/screen.scss */
+.mainmenu {
+  margin-right: 15px !important;
+}
+
+/* line 187, ../sass/screen.scss */
+.cover_thumb {
+  max-height: 200px;
+  max-width: 200px;
+}
+
+/* line 192, ../sass/screen.scss */
+.authorbio {
+  margin: 8px 4 0 23px;
+}
+
+/* line 196, ../sass/screen.scss */
+.authorbio .authorphoto {
+  margin: 72px 0 0 2px;
+}
+
+/* line 204, ../sass/screen.scss */
+.booklist li {
+  list-style-type: none;
+}

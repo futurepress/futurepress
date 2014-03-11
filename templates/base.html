@@ -21,10 +21,8 @@
     <![endif]-->
 
     <!-- Custom styles for this template -->
-    <link href="{{ url_for('static', filename='css/carousel.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/screen.css') }}" rel="stylesheet">
     {% if request.endpoint == 'login' or request.endpoint == 'register' %}
-      <link href="{{ url_for('static', filename='css/signin.css') }}" rel="stylesheet">
       <script src="{{ url_for('static', filename='js/jquery.validate.min.js') }}"></script>
     {% endif %}
 

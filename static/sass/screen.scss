@@ -1,3 +1,13 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+/*
+ * ------------ from carousel.css needs to be sassed ------
+ *
+ */
+
 /* GLOBAL STYLES
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */
@@ -146,3 +156,51 @@ body {
     margin-top: 120px;
   }
 }
+
+/*
+* ------------ end carousel.css ------
+*
+*/
+
+/*
+ * ---- FuturePress SASS ----
+ */
+
+@import 'login';
+
+/*
+ * -- Main Styles --
+ */
+
+ .topofpage {
+ 	margin-top: 80px;
+ }
+
+ .pull-right {
+ 	float: right !important;
+ }
+
+ .mainmenu {
+ 	margin-right: 15px !important;
+ }
+
+ .cover_thumb {
+    max-height: 200px;
+    max-width: 200px;
+ }
+
+ .authorbio {
+ 	margin: 8px 4 0 23px;
+ }
+
+ .authorbio .authorphoto {
+	margin: 72px 0 0 2px;
+ }
+
+ .booklist {
+
+ }
+
+ .booklist li {
+ 	list-style-type: none;
+ }

@@ -21,7 +21,7 @@
                 {% else %}
                 <li{% if request.endpoint == 'makers' %} class='active' {% endif %}><a href="{{ url_for('makers') }}">Content makers</a></li>
                 {% endif %}
-                <li{% if request.endpoint == 'readers' %} class='active' {% endif %}><a href="{{ url_for('readers') }}">Readers</a></li>
+                <li{% if request.endpoint == 'library' %} class='active' {% endif %}><a href="/">Library</a></li>
                 <li>
                   <form class="navbar-form">
                     <input type="text" class="form-control" placeholder="Search...">
