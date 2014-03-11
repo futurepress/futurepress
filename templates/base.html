@@ -12,8 +12,7 @@
     <!-- Bootstrap core CSS -->
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -24,6 +23,11 @@
     <!-- Custom styles for this template -->
     <link href="{{ url_for('static', filename='css/carousel.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+    {% if request.endpoint == 'login' or request.endpoint == 'register' %}
+      <link href="{{ url_for('static', filename='css/signin.css') }}" rel="stylesheet">
+      <script src="{{ url_for('static', filename='js/jquery.validate.min.js') }}"></script>
+    {% endif %}
+
   </head>
 <!-- NAVBAR
 ================================================== -->
@@ -32,10 +36,10 @@
     {% include "nav.html" %}
 
     {% block body %}{% endblock %}
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
     <script src="{{ url_for('static', filename='js/docs.min.js') }}"></script>
   </body>
