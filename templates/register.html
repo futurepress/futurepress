@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <!-- Begin page content -->
+    <div class="container topofpage">
+      <form id="register" action="{{ url_for('register') }}" method="POST" class="form-register" role="form">
+        <h3 class="form-register-heading">Register</h3>
+        <input name="first_name" type="text" class="form-control" placeholder="First Name" required autofocus>
+        <input name="last_name" type="text" class="form-control" placeholder="Last Name" required>
+        <br>
+        <input name="email" type="email" class="form-control" placeholder="Email address" required>
+        <br>
+        <input id="password" name="password" type="password" class="form-control" placeholder="Password" required>
+        <input name="confirm" type="password" class="form-control" placeholder="Confirm Password" required>
+        <label class="checkbox">
+          <input name="is_author" type="checkbox" value="is_author">Is Author?
+        </label>
+        {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+        <span class="help-block">Already Registered? <a href="{{ url_for('login') }}">Go Sign In!</a></span>
+      </form>
+
+    <!-- FOOTER -->
+    {% include 'footer.html' %}
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#register").validate({
+                rules:{
+                    email:{
+                        required: true,
+                        email: true
+                    },
+                    password:{
+                        required: true,
+                        minlength: 6
+                    },
+                    confirm:{
+                        required: true,
+                        equalTo: "#password"
+                    },
+                    },
+                errorClass: "help-inline"
+                });
+        });
+    </script>
+{% endblock %}

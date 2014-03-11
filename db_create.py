@@ -3,7 +3,7 @@ __author__ = 'ajrenold'
 # db_create.py
 
 from test.data import books, authors
-from models import db, Flaskr, Book, Author
+from models import Book, Author, AppUser, stormpathUserHash
 
 def createTestDB(db):
 
@@ -20,4 +20,10 @@ def createTestDB(db):
         book_data['author'] = Author.query.filter_by(name=book_data['author']).first()
         db.session.add(Book.book_from_dict(**book_data))
     # commit the changes
+    db.session.commit()
+
+    #load users
+    for author_data in authors:
+        author = Author.query.filter_by(name=author_data['name']).first()
+        db.session.add(AppUser(stormpathUserHash(author_data['user_href']), author_data['user_href'], author))
     db.session.commit()

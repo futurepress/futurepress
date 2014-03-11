@@ -13,6 +13,23 @@
               <a class="navbar-brand" href="/">FUTUREPRESS</a>
             </div>
             <div class="navbar-collapse collapse pull-right mainmenu">
+              {% if user.is_authenticated() %}
+              <ul class="nav navbar-nav">
+                <li{% if request.endpoint == 'index' %} class='active' {% endif %}><a href="{{ url_for('index') }}">Discover</a></li>
+                {% if app_user.is_author %}
+                <li{% if request.endpoint == 'author_dashboard' %} class='active' {% endif %}><a href="/">Author Dashboard</a></li>
+                {% else %}
+                <li{% if request.endpoint == 'makers' %} class='active' {% endif %}><a href="{{ url_for('makers') }}">Content makers</a></li>
+                {% endif %}
+                <li{% if request.endpoint == 'readers' %} class='active' {% endif %}><a href="{{ url_for('readers') }}">Readers</a></li>
+                <li>
+                  <form class="navbar-form">
+                    <input type="text" class="form-control" placeholder="Search...">
+                  </form>
+                </li>
+                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+              </ul>
+              {% else %}
               <ul class="nav navbar-nav">
                 <li {% if request.endpoint == 'index' %} class='active' {% endif %}><a href="{{ url_for('index') }}">Discover</a></li>
                 <li {% if request.endpoint == 'makers' %} class='active' {% endif %}><a href="{{ url_for('makers') }}">Content makers</a></li>
@@ -22,7 +39,9 @@
                     <input type="text" class="form-control" placeholder="Search...">
                   </form>
                 </li>
+                <li><a href="{{ url_for('login') }}">Sign In</a></li>
               </ul>
+              {% endif %}
             </div>
           </div>
         </div>
