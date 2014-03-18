@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="container topofpage">
+
+      <div class="row booklist">
+          <ul>
+            {% for book in genre.books %}
+              {% include 'book_item.html' %}
+            {% endfor %}
+          </ul>
+      </div>
+    <!-- FOOTER -->
+    {% include 'footer.html' %}
+    </div><!-- /container -->
+{% endblock %}

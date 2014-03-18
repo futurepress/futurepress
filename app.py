@@ -11,7 +11,7 @@ from flask.ext.stormpath import (StormpathManager,
                                 logout_user,
                                 user,
                             )
-from models import db, Book, Author, AppUser, stormpathUserHash
+from models import ( db, Book, Author, Genre, AppUser, stormpathUserHash )
 from key import ( apiKey_id, apiKey_secret )
 from stormpath.error import Error as StormpathError
 
@@ -64,13 +64,22 @@ def bookpage(book_id):
             return render_template('bookpage.html', book=book)
     return redirect(url_for('index'))
 
-@app.route('/author/<int:author_id>')
-def authorpage(author_id):
-    if author_id:
-        author = Author.query.get(author_id)
+@app.route('/author/<author_slug>')
+def authorpage(author_slug):
+    if author_slug:
+        author = Author.query.filter_by(slug=author_slug).first()
         if author:
             #return jsonify(author.as_dict())
             return render_template('authorpage.html', author=author)
+    return redirect(url_for('index'))
+
+@app.route('/genre/<genre_slug>')
+def genrepage(genre_slug):
+    if genre_slug:
+        genre = Genre.query.filter_by(slug=genre_slug).first()
+        if genre:
+            #return jsonify(author.as_dict())
+            return render_template('genrepage.html', genre=genre)
     return redirect(url_for('index'))
 
 @app.route('/copyright')
@@ -139,7 +148,6 @@ def login():
             request.form.get('password'),
         )
     except StormpathError, err:
-        app.logger.debug(err.message)
         return render_template('login.html', error=err.message)
 
     login_user(_user, remember=True)

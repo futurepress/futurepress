@@ -11,15 +11,13 @@
         <div class="col-md-7">
           <h2 class="featurette-heading">{{ book.title }}</h2>
           <h4>Author</h4>
-          <p><a href="/author/{{ book.author.author_id }}">{{ book.author.name }}</a></p>
+          <p><a href="/author/{{ book.author.slug }}">{{ book.author.name }}</a></p>
           <h4>Publisher</h4>
           <p>{{ book.publisher }}</p>
           <h4>Genres</h4>
           {% for genre in book.genres %}
-            <p>{{ genre.name }}</p>
+            <a href="/genre/{{ genre.slug }}">{{ genre.name }}</a>
           {% endfor %}
-
-
         </div>
       </div>
     <!-- FOOTER -->

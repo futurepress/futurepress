@@ -1,0 +1,11 @@
+<li class="">
+    <img class="cover_thumb" src="/{{book.cover_thumb}}">
+    <h3 class=""><a href="/book/{{book.book_id}}">{{ book.title }}</a></h3>
+    <p>By <a href="/author/{{ book.author.slug }}">{{ book.author.name }}</a></p>
+    <p>Book description. Blah blah, blah..</p>
+    <p>Price</p>
+    <p>Reviews</p>
+    <p>{% for genre in book.genres %}
+        <a href="/genre/{{ genre.slug }}">{{ genre.name }}</a>
+    {% endfor %}</p>
+</li>
