@@ -1,6 +1,5 @@
 import os
 import sys
-
 from flask import (Flask, request, session, g,
                     redirect, url_for, abort,
                     render_template, flash, jsonify
@@ -12,13 +11,10 @@ from flask.ext.stormpath import (StormpathManager,
                                 logout_user,
                                 user,
                             )
-
-
 from models import db, Book, Author, AppUser, stormpathUserHash
-from db_create import createTestDB
-
 from key import ( apiKey_id, apiKey_secret )
 from stormpath.error import Error as StormpathError
+
 
 TESTING = True
 DEBUG = True
@@ -162,6 +158,7 @@ if __name__ == "__main__":
 
     args = sys.argv
     if args[1] == 'test':
+        from test.db_create import createTestDB
         if not os.path.isfile("test.db"):
             print "test.db not found, creating..."
             with app.app_context():
@@ -171,5 +168,8 @@ if __name__ == "__main__":
             print "Removing test.db and recreating..."
             with app.app_context():
                 createTestDB(db)
+    else:
+        print 'run app with "$ python app.py test"'
+        sys.exit()
 
     app.run()
