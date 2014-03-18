@@ -1,0 +1,17 @@
+<div class="navbar-collapse collapse pull-right mainmenu">
+  <ul class="nav navbar-nav">
+    <li{% if request.endpoint == 'index' %} class='active' {% endif %}><a href="{{ url_for('index') }}">Discover</a></li>
+    {% if app_user.is_author %}
+    <li{% if request.endpoint == 'author_dashboard' %} class='active' {% endif %}><a href="/">Author Dashboard</a></li>
+    {% else %}
+    <li{% if request.endpoint == 'makers' %} class='active' {% endif %}><a href="{{ url_for('makers') }}">Content makers</a></li>
+    {% endif %}
+    <li{% if request.endpoint == 'library' %} class='active' {% endif %}><a href="/">Library</a></li>
+    <li>
+      <form class="navbar-form">
+        <input type="text" class="form-control" placeholder="Search...">
+      </form>
+    </li>
+    <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+  </ul>
+</div>
