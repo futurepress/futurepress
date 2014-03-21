@@ -10,3 +10,7 @@ Test Author Login
 
 * email: jake.harnell@test.com
 * pass: Jake1234
+
+Unittest
+
+* Run ```$ python run_tests.py```
