@@ -1,8 +1,6 @@
 __author__ = 'ajrenold'
 
-# db_create.py
-import os
-from data import books, authors
+from test.data import books, authors
 from models import Book, Author, AppUser, Genre, stormpathUserHash
 
 def bootstrapTestDB(db, refresh_db=False):
