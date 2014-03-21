@@ -1,14 +1,15 @@
 __author__ = 'ajrenold'
 
 # db_create.py
-
+import os
 from data import books, authors
 from models import Book, Author, AppUser, Genre, stormpathUserHash
 
-def createTestDB(db):
-
-    # create the database and the db table
-    db.create_all()
+def bootstrapTestDB(db, refresh_db=False):
+    """
+        Takes an created SQLAlchemy db and bootstraps the tables
+        with dummy data
+    """
 
     # load authors
     for author_data in authors:

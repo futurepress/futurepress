@@ -2,9 +2,7 @@ __author__ = 'ajrenold'
 
 import re
 from unidecode import unidecode
-from flask.ext.sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from core import db
 
 class AppUser(db.Model):
 

@@ -2,9 +2,13 @@ Flask==0.10.1
 Flask-Login==0.2.9
 Flask-SQLAlchemy==1.0
 Flask-Stormpath==0.0.1
+Flask-Testing==0.4.1
+Flask-WTF==0.9.4
 Jinja2==2.7.2
 MarkupSafe==0.18
 SQLAlchemy==0.9.3
+Unidecode==0.04.14
+WTForms==1.0.5
 Werkzeug==0.9.4
 itsdangerous==0.23
 requests==2.2.1
