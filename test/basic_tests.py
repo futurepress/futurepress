@@ -2,19 +2,38 @@ import os
 import unittest
 from flask.ext.testing import TestCase
 
+from flask.ext.stormpath import (
+                                User,
+                                login_user,
+                                logout_user,
+                                user
+                            )
+
 from app import create_app
 from core import db, TestConfig
 from models import ( Book, Author, Genre, AppUser, stormpathUserHash )
 from test.db_create import bootstrapTestDB
 
-EMAIL = 'jake.hartnell@test.com'
-PASSWORD = 'Jake1234'
 DATABASE_PATH = TestConfig.DATABASE_PATH
+
+
+def testCreateApp(self):
+    return create_app('core.TestConfig')
+
+def testSetUp(self):
+    if os.path.isfile(DATABASE_PATH):
+        os.remove(DATABASE_PATH)
+    db.create_all()
+    bootstrapTestDB(db)
+
+def testTearDown(self):
+    db.session.remove()
+    db.drop_all()
+    os.remove(DATABASE_PATH)
 
 class TestSetup(TestCase):
 
-    def create_app(self):
-        return create_app('core.TestConfig')
+    create_app = testCreateApp
 
     def test_setup(self):
 
@@ -24,19 +43,9 @@ class TestSetup(TestCase):
 
 class TestBookQuery(TestCase):
 
-    def create_app(self):
-        return create_app('core.TestConfig')
-
-    def setUp(self):
-        if os.path.isfile(DATABASE_PATH):
-            os.remove(DATABASE_PATH)
-        db.create_all()
-        bootstrapTestDB(db)
-
-    def tearDown(self):
-        db.session.remove()
-        db.drop_all()
-        os.remove(DATABASE_PATH)
+    create_app = testCreateApp
+    setUp = testSetUp
+    tearDown = testTearDown
 
     def test_book_one_title(self):
         book = Book.query.get(1)
@@ -63,19 +72,9 @@ class TestBookQuery(TestCase):
 
 class TestAuthorQuery(TestCase):
 
-    def create_app(self):
-        return create_app('core.TestConfig')
-
-    def setUp(self):
-        if os.path.isfile(DATABASE_PATH):
-            os.remove(DATABASE_PATH)
-        db.create_all()
-        bootstrapTestDB(db)
-
-    def tearDown(self):
-        db.session.remove()
-        db.drop_all()
-        os.remove(DATABASE_PATH)
+    create_app = testCreateApp
+    setUp = testSetUp
+    tearDown = testTearDown
 
     def test_author_name(self):
         author = Author.query.get(1)
@@ -88,6 +87,22 @@ class TestAuthorQuery(TestCase):
         assert author.user_id == stormpathUserHash(app_user.user_href)
         assert author.user_id == app_user.user_id
 
+class TestUserLogin(TestCase):
+
+    create_app = testCreateApp
+    setUp = testSetUp
+    tearDown = testTearDown
+
+    def test_user_can_login(self):
+        _user = User.from_login(
+                TestConfig.USER_EMAIL,
+                TestConfig.USER_PASSWORD,
+            )
+        login_user(_user)
+
+        user_id = user.get_id()
+        app_user = AppUser.query.get(stormpathUserHash(user_id))
+        assert app_user.user_href == user_id
 
 if __name__ == '__main__':
     unittest.main()

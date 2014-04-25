@@ -25,7 +25,7 @@ class AppUser(db.Model):
         self.is_author = True if author is not None else False
 
     def __repr__(self):
-        return '<user {}>'.format(self.name)
+        return '<user {}>'.format(self.user_id)
 
 class Author(db.Model):
 

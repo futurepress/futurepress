@@ -31,3 +31,6 @@ class TestConfig(Config):
     STORMPATH_APPLICATION = 'flask-stormpath-sample'
     DATABASE_PATH = os.path.join(basedir, 'test', 'unittest.db')
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_PATH
+
+    USER_PASSWORD = 'Jake1234'
+    USER_EMAIL = 'jake.hartnell@test.com'
