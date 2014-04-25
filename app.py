@@ -4,6 +4,9 @@ from flask import (Flask, request, session, g,
                     redirect, url_for, abort,
                     render_template, flash, jsonify
                 )
+
+from flask.ext.sqlalchemy import SQLAlchemy
+
 from flask.ext.stormpath import (StormpathManager,
                                 User,
                                 login_required,
@@ -17,13 +20,16 @@ from stormpath.error import Error as StormpathError
 from settings import basedir
 
 from models import ( Book, Author, Genre, AppUser, stormpathUserHash )
-from core import db
+#from core import db
 
 def create_app(config_object):
 
     app = Flask(__name__)
     app.config.from_object(config_object)
+
+    db = SQLAlchemy()
     db.init_app(app)
+
     stormpath_manager = StormpathManager(app)
     stormpath_manager.login_view = '.login'
 
