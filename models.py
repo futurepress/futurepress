@@ -160,6 +160,7 @@ def stormpathUserHash(user_href):
     """
     return user_href[user_href.rfind('/')+1:]
 
+
 _punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
 def slugify(text, delim=u'-'):
     """Generates an ASCII-only slug."""

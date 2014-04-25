@@ -38,9 +38,28 @@ class TestBookQuery(TestCase):
         db.drop_all()
         os.remove(DATABASE_PATH)
 
-    def test_book_one(self):
+    def test_book_one_title(self):
         book = Book.query.get(1)
         assert book.title == "Super Sad True Love Story"
+
+    def test_book_one_genres(self):
+        book = Book.query.get(1)
+
+        genre_one = book.genres[0]
+        assert genre_one.name == "Fiction"
+        assert genre_one.slug == "fiction"
+
+        genre_two = book.genres[1]
+        assert genre_two.name == "Romance"
+        assert genre_two.slug == "romance"
+
+    def test_book_one_author(self):
+        book = Book.query.get(1)
+
+        author = book.author
+        assert author.name == "Gary Shteyngart"
+        assert author.user_id == "26bgM8tHF8clJCykQvIFCJ"
+
 
 class TestAuthorQuery(TestCase):
 
@@ -58,9 +77,17 @@ class TestAuthorQuery(TestCase):
         db.drop_all()
         os.remove(DATABASE_PATH)
 
-    def test_author_one(self):
+    def test_author_name(self):
         author = Author.query.get(1)
         assert author.name == "Gary Shteyngart"
+
+    def test_author_app_user_relation(self):
+        author = Author.query.filter_by(name="Jake Hartnell").first()
+        app_user = AppUser.query.get(author.user_id)
+
+        assert author.user_id == stormpathUserHash(app_user.user_href)
+        assert author.user_id == app_user.user_id
+
 
 if __name__ == '__main__':
     unittest.main()
