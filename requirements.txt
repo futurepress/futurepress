@@ -10,6 +10,7 @@ SQLAlchemy==0.9.3
 Unidecode==0.04.14
 WTForms==1.0.5
 Werkzeug==0.9.4
+boto==2.27.0
 itsdangerous==0.23
 requests==2.2.1
 stormpath==1.0.1
