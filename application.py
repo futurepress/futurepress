@@ -74,21 +74,11 @@ if __name__ == "__main__":
 
     app = create_app('core.DevConfig')
 
-    args = sys.argv
-    if args[1] == 'dev':
-        from test.db_create import bootstrapTestDB
-        if not os.path.isfile("dev.db"):
-            print "dev.db not found, creating..."
-            with app.app_context():
-                db.create_all()
-                bootstrapTestDB(db)
-
-    else:
-        from test.db_create import bootstrapTestDB
-        if not os.path.isfile("dev.db"):
-            print "dev.db not found, creating..."
-            with app.app_context():
-                db.create_all()
-                bootstrapTestDB(db)
+    from test.db_create import bootstrapTestDB
+    if not os.path.isfile("dev.db"):
+        print "dev.db not found, creating..."
+        with app.app_context():
+            db.create_all()
+            bootstrapTestDB(db)
 
     app.run()
