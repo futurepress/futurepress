@@ -4,7 +4,7 @@
 
     <!-- Begin page content -->
     <div class="container topofpage">
-      <form id="register" action="{{ url_for('register') }}" method="POST" class="form-register" role="form">
+      <form id="register" action="{{ url_for('auth_routes.register') }}" method="POST" class="form-register" role="form">
         <h3 class="form-register-heading">Register</h3>
         <input name="first_name" type="text" class="form-control" placeholder="First Name" required autofocus>
         <input name="last_name" type="text" class="form-control" placeholder="Last Name" required>
@@ -18,7 +18,7 @@
         </label>
         {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
-        <span class="help-block">Already Registered? <a href="{{ url_for('login') }}">Go Sign In!</a></span>
+        <span class="help-block">Already Registered? <a href="{{ url_for('auth_routes.login') }}">Go Sign In!</a></span>
       </form>
 
     <!-- FOOTER -->

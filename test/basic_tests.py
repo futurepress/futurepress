@@ -104,5 +104,23 @@ class TestUserLogin(TestCase):
         app_user = AppUser.query.get(stormpathUserHash(user_id))
         assert app_user.user_href == user_id
 
+class TestHomePage(TestCase):
+    create_app = testCreateApp
+    setUp = testSetUp
+    tearDown = testTearDown
+
+    def test_home_page_content_is_as_expected(self):
+        rv = self.client.get('/')
+        assert '<h1>Welcome to the future of publishing</h1>' in rv.data
+
+class TestBasicFeed(TestCase):
+    create_app = testCreateApp
+    setUp = testSetUp
+    tearDown = testTearDown
+
+    def test_root_url_for_books_feed(self):
+        rv = self.client.get('/book/2.atom')
+        assert '<?xml version="1.0" encoding="UTF-8"?>' in rv.data
+
 if __name__ == '__main__':
     unittest.main()

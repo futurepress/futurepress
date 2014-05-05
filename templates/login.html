@@ -4,7 +4,7 @@
 
     <!-- Begin page content -->
     <div class="container topofpage">
-      <form action="{{ url_for('login') }}" method="POST" class="form-signin" role="form">
+      <form action="{{ url_for('auth_routes.login') }}" method="POST" class="form-signin" role="form">
         <h3 class="form-signin-heading">Please sign in</h3>
         <input name="email" type="email" class="form-control" placeholder="Email address" required autofocus>
         <input name="password" type="password" class="form-control" placeholder="Password" required>
@@ -13,7 +13,7 @@
         </label>
         {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <span class="help-block">Not Registered Yet? <a href="{{ url_for('register') }}">Register</a></span>
+        <span class="help-block">Not Registered Yet? <a href="{{ url_for('auth_routes.register') }}">Register</a></span>
       </form>
 
     <!-- FOOTER -->
