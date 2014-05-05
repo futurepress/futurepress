@@ -18,6 +18,7 @@ from boto.s3.connection import S3Connection
 from core import db
 from model_utils import slugify
 from key import s3access, s3secret
+from settings import S3BUCKET
 
 genre_relations = db.Table('genre_relations',
     db.Column('genre_id', db.Integer, db.ForeignKey('genres.genre_id')),
@@ -40,6 +41,7 @@ class Book(db.Model):
 
     # other columns
     title = db.Column(db.String, nullable=False)
+    isbn = db.Column(db.String, nullable=False)
     publisher = db.Column(db.String, nullable=False)
     cover_large = db.Column(db.String, nullable=False)
     cover_thumb = db.Column(db.String, nullable=False)
@@ -50,9 +52,10 @@ class Book(db.Model):
     stream_url = db.Column(db.String, nullable=False)
     atom_entry_url = db.Column(db.String, nullable=False)
 
-    def __init__(self, title, author, publisher, genres, cover_large,
+    def __init__(self, title, isbn, author, publisher, genres, cover_large,
                  cover_thumb, epub_url, stream_url, atom_entry_url):
         self.title = title
+        self.isbn = isbn
         self.author = author
         self.publisher = publisher
         self.genres = genres
@@ -68,6 +71,7 @@ class Book(db.Model):
     @staticmethod
     def book_from_dict(**kwargs):
         return Book(kwargs.get('title', ""),
+                    kwargs.get('isbn', ""),
                     kwargs.get('author', ""),
                     kwargs.get('publisher', ""),
                     kwargs.get('genres', ""),
@@ -82,14 +86,11 @@ class Book(db.Model):
 
     def as_dict(self):
         return { 'title': self.title,
+                 'isbn': self.isbn,
                  'author': self.author.as_dict(),
                  'publisher': self.publisher,
                  'genres': [ g.as_dict() for g in self.genres ],
                  'slug': self.slug }
-
-
-
-S3Bucket = 'epubjs.books'
 
 ## also see gutenberg book mirror, where 135 =
 ## http://snowy.arsc.alaska.edu/gutenberg/cache/generated/135/pg135-images.epub
@@ -100,9 +101,10 @@ class BookUploader():
     def __init__(self, filename, book_file):
 
         if book_file:
-            self.zip_file = self.getZipFile(book_file)
             self.file_dir = self.getFileDir(filename)
-            self.uploadS3(self.zip_file, self.file_dir) ## Only uploads unzipped epub
+            self.key_name = self.uploadEpubS3(book_file, self.file_dir)
+            #self.zip_file = self.getZipFile(book_file)
+            #self.uploadUnzippedS3(self.zip_file, self.file_dir) ## Only uploads unzipped epub
 
     def getZipFile(self, book_file):
         return ZipFile(StringIO.StringIO(book_file.read()))
@@ -110,16 +112,30 @@ class BookUploader():
     def getFileDir(self, filename):
         return filename[:filename.find('.epub')] + '/'
 
-    def uploadS3(self, zip_file, file_dir):
+    def uploadEpubS3(self, book_file, file_dir):
+        conn = S3Connection(s3access, s3secret)
+        bucket = conn.get_bucket(S3BUCKET)
+
+        k = Key(bucket)
+
+        key_name = 'epubs/' + book_file.filename
+        k.key = key_name
+
+        k.set_metadata('Content-Type', 'application/epub+zip')
+        k.set_contents_from_string(book_file.read())
+
+        return key_name
+
+    def uploadUnzippedS3(self, zip_file, file_dir):
         for f in zip_file.filelist:
 
             file_mime = guess_type(f.filename)[0]
 
             conn = S3Connection(s3access, s3secret)
-            bucket = conn.get_bucket(S3Bucket)
+            bucket = conn.get_bucket(S3BUCKET)
 
             k = Key(bucket)
-            k.key = file_dir + f.filename
+            k.key = 'books/' + file_dir + f.filename
 
             if file_mime:
                 k.set_metadata('Content-Type', file_mime)

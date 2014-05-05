@@ -18,6 +18,7 @@ from stormpath.error import Error as StormpathError
 # Our Imports
 from core import db
 from models import ( Author, AppUser, Book, BookUploader, stormpathUserHash )
+from settings import CLOUDFRONTURL
 
 author_routes = Blueprint('author_routes', __name__,
                         template_folder='templates')
@@ -32,7 +33,7 @@ def authorpage(author_slug):
     return redirect(url_for('index'))
 
 @login_required
-@author_routes.route('/dashboard')
+@author_routes.route('/dashboard/')
 def author_dashboard():
     user_id = user.get_id()
     app_user = AppUser.query.get(stormpathUserHash(user_id))
@@ -50,27 +51,27 @@ def add_book():
         if request.method == 'GET':
             return render_template('add_book.html', author=app_user.author)
 
-
         book_file = request.files.get('epub_file', None)
-            # POST is a epub file upload
+
+        # POST is a epub file upload
         if book_file.content_type == 'application/epub+zip' or book_file.content_type == 'application/octet-stream':
             book_upload = BookUploader(book_file.filename, book_file)
-            book_location = book_upload.file_dir[:-1]
+            epub_url = CLOUDFRONTURL + book_upload.key_name
 
         # fetch genres too!
         book_data = {
                       'author': app_user.author,
+                      'isbn': request.form.get('isbn'),
                       'title': request.form.get('title'),
                       'publisher': request.form.get('publisher'),
-                      'epub_url': book_location
+                      'epub_url': epub_url
                       }
 
         book = Book.book_from_dict(**book_data)
         db.session.add(book)
         db.session.commit()
 
-        print book
-        return render_template('add_book.html', author=app_user.author)
+        return redirect(url_for('author_routes.author_dashboard'))
 
     return redirect(url_for('index'))
 
