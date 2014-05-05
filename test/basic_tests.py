@@ -9,7 +9,7 @@ from flask.ext.stormpath import (
                                 user
                             )
 
-from app import create_app
+from application import create_app
 from core import db, TestConfig
 from models import ( Book, Author, Genre, AppUser, stormpathUserHash )
 from test.db_create import bootstrapTestDB

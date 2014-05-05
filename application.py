@@ -84,7 +84,11 @@ if __name__ == "__main__":
                 bootstrapTestDB(db)
 
     else:
-        print 'run app with "$ python app.py dev"'
-        sys.exit()
+        from test.db_create import bootstrapTestDB
+        if not os.path.isfile("dev.db"):
+            print "dev.db not found, creating..."
+            with app.app_context():
+                db.create_all()
+                bootstrapTestDB(db)
 
     app.run()
