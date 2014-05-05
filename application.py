@@ -72,13 +72,13 @@ def create_app(config_object):
 
 if __name__ == "__main__":
 
-    app = create_app('core.DevConfig')
+    application = create_app('core.DevConfig')
 
     from test.db_create import bootstrapTestDB
     if not os.path.isfile("dev.db"):
         print "dev.db not found, creating..."
-        with app.app_context():
+        with application.app_context():
             db.create_all()
             bootstrapTestDB(db)
 
-    app.run()
+    application.run()
