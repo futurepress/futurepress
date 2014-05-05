@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <!-- Begin page content -->
+    <div class="container topofpage">
+       <h3 class="form-register-heading">Author Library</h3>
+        <table class="table">
+            <thead><tr><th>Cover</th><th>Title</th><th>Genres</th><th>Price</th><th>Edit Listing</th></tr></thead>
+            <tbody>
+                {% for book in author.books %}
+                <tr>
+                    <td><img class="cover_thumb" src="/{{book.cover_thumb}}"></td>
+                    <td>{{ book.title }}</td>
+                    <td>{% for genre in book.genres %}{{genre.name}}, {% endfor %}</td>
+                    <td>0</td>
+                    <td>Edit</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    <!-- FOOTER -->
+    {% include 'footer.html' %}
+
+{% endblock %}

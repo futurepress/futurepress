@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <!-- Begin page content -->
+    <div class="container topofpage">
+      <form id="register" action="{{ url_for('author_routes.add_book') }}" method="POST" class="form-register" role="form" enctype="multipart/form-data">
+        <h3 class="form-register-heading">Add Book</h3>
+        <input name="title" type="text" class="form-control" placeholder="Book Title" required>
+        <br>
+        <input name="publisher" type="text" class="form-control" placeholder="Publisher" required>
+        <br>
+        <input name="genres" type="text" class="form-control" placeholder="Genres" required>
+        <br>
+        <label for="epub_file">Epub File</label>
+        <input id="epub_file" name="epub_file" type="file" class="form-control" required>
+        <br>
+        {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">List Book</button>
+      </form>
+
+    <!-- FOOTER -->
+    {% include 'footer.html' %}
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#register").validate({
+                rules:{
+                    title:{
+                        required: true,
+                    },
+                    genres:{
+                        required: true,
+                    },
+                }
+                errorClass: "help-inline"
+                });
+        });
+    </script>
+{% endblock %}

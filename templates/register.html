@@ -6,7 +6,9 @@
     <div class="container topofpage">
       <form id="register" action="{{ url_for('auth_routes.register') }}" method="POST" class="form-register" role="form">
         <h3 class="form-register-heading">Register</h3>
-        <input name="first_name" type="text" class="form-control" placeholder="First Name" required autofocus>
+        <input name="username" type="text" class="form-control" placeholder="Username" required>
+        <br>
+        <input name="first_name" type="text" class="form-control" placeholder="First Name" required>
         <input name="last_name" type="text" class="form-control" placeholder="Last Name" required>
         <br>
         <input name="email" type="email" class="form-control" placeholder="Email address" required>
@@ -28,6 +30,9 @@
         $(document).ready(function(){
             $("#register").validate({
                 rules:{
+                    username:{
+                        required: true,
+                    },
                     email:{
                         required: true,
                         email: true

@@ -2,6 +2,7 @@ __author__ = 'ajrenold'
 
 # Libs
 from flask import url_for
+from flask.ext.sqlalchemy import ( SQLAlchemy )
 
 # Our Imports
 from core import db
@@ -21,13 +22,13 @@ class Author(db.Model):
     user_id = db.Column(db.String, db.ForeignKey('app_users.user_id'))
 
     # other columns
-    name = db.Column(db.String, nullable=False)
+    name = db.Column(db.String, nullable=False, unique=True)
     bio = db.Column(db.String, nullable=False)
     picture = db.Column(db.String, nullable=False)
     website = db.Column(db.String, nullable=False)
     blog = db.Column(db.String, nullable=False)
     twitter_id = db.Column(db.String, nullable=False)
-    slug = db.Column(db.String, nullable=False)
+    slug = db.Column(db.String, nullable=False, unique=True)
 
     def __init__(self, name, bio, picture, website, blog, twitter_id):
         self.name = name
@@ -46,6 +47,15 @@ class Author(db.Model):
                       kwargs.get('website', ""),
                       kwargs.get('blog', ""),
                       kwargs.get('twitter_id', ""))
+
+    def update_name(self, name):
+        self.name = name
+        self.slug = slugify(name)
+        try:
+            db.session.commit()
+        except:
+            # TODO flash error message
+            db.session.rollback()
 
     def __repr__(self):
         return '<author {}>'.format(self.name)

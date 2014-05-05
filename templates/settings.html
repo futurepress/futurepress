@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <!-- Begin page content -->
+    <div class="container topofpage">
+      <form id="settings" action="{{ url_for('user_routes.settings') }}" method="POST" class="form-register" role="form">
+        <h3 class="form-register-heading">Settings</h3>
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" class="form-control" value="{{ user.username }}" required>
+        <label for="first_name">First Name</label>
+        <input id="first_name" name="first_name" type="text" class="form-control" value="{{ user.given_name }}" required>
+        <label for="last_name">Last Name</label>
+        <input id="last_name" name="last_name" type="text" class="form-control" value="{{ user.surname }}" required>
+        <br>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" class="form-control" value="{{ user.email }}" required>
+        <br>
+        <label class="checkbox">
+          <input name="is_author" type="checkbox" value="is_author"
+            {% if app_user.is_author %}checked>{% else %}> {% endif %} Is Author?
+        </label>
+        <label for="author_name">Author Name</label>
+        <input id="author_name" name="author_name" type="text" class="form-control" value="{{ app_user.author.name }}" required>
+        <p><a href="{{ url_for('author_routes.authorpage',author_slug=app_user.author.slug) }}">
+            {{ url_for('author_routes.authorpage',author_slug=app_user.author.slug) }}</a></p>
+        <br>
+        {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Update Settings</button>
+      </form>
+
+    <!-- FOOTER -->
+    {% include 'footer.html' %}
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#register").validate({
+                rules:{
+                    email:{
+                        required: true,
+                        email: true
+                    },
+                    password:{
+                        required: true,
+                        minlength: 6
+                    },
+                    confirm:{
+                        required: true,
+                        equalTo: "#password"
+                    },
+                    },
+                errorClass: "help-inline"
+                });
+        });
+    </script>
+{% endblock %}
