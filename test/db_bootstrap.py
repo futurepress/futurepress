@@ -38,5 +38,5 @@ def bootstrapTestDB(db):
     #load users
     for author_data in authors_copy:
         author = Author.query.filter_by(name=author_data['name']).first()
-        db.session.add(AppUser(stormpathUserHash(author_data['user_href']), author_data['user_href'], author))
+        db.session.add(AppUser(author_data['user_href'], author))
     db.session.commit()

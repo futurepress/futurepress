@@ -88,6 +88,5 @@ def genrepage(genre_slug):
     if genre_slug:
         genre = Genre.query.filter_by(slug=genre_slug).first()
         if genre:
-            #return jsonify(author.as_dict())
             return render_template('genrepage.html', genre=genre)
     return redirect(url_for('index'))

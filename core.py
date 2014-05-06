@@ -20,6 +20,7 @@ class DevConfig(Config):
     STORMPATH_APPLICATION = 'flask-stormpath-sample'
     DATABASE_PATH = os.path.join(basedir, 'dev.db')
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_PATH
+    SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 
 class AWSConfig(Config):
     DEBUG = False
@@ -28,8 +29,9 @@ class AWSConfig(Config):
     STORMPATH_API_KEY_ID = apiKey_id
     STORMPATH_API_KEY_SECRET = apiKey_secret
     STORMPATH_APPLICATION = 'flask-stormpath-sample'
-    DATABASE_PATH = os.path.join(basedir, 'dev.db')
+    DATABASE_PATH = os.path.join(basedir, 'aws.db')
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_PATH
+    SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 
 class TestConfig(Config):
     DEBUG = True

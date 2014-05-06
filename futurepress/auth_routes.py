@@ -18,6 +18,8 @@ from stormpath.error import Error as StormpathError
 
 
 # Our Imports
+from models import ( AppUser )
+from core import db
 
 auth_routes = Blueprint('auth_routes', __name__,
                         template_folder='templates')
@@ -53,6 +55,10 @@ def register():
             'custom_data': { 'is_author': is_author }
         })
         _user.__class__ = User
+
+        app_user = AppUser(_user.get_id())
+        db.session.add(app_user)
+        db.session.commit()
 
     except StormpathError, err:
         return render_template('register.html', error=err.message)

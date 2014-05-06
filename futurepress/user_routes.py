@@ -32,6 +32,7 @@ def settings():
     if request.method == 'GET':
         return render_template('settings.html')
 
+    ## handle a POST
     is_author = True if request.form.get('is_author') is not None else False
 
     try:
@@ -52,3 +53,9 @@ def settings():
             app_user.author.update_name(author_name)
 
     return render_template('settings.html')
+
+@user_routes.route('/appusers', methods=['GET'])
+def appusers():
+
+    appusers = AppUser.query.all()
+    return jsonify(appusers=[a.as_dict() for a in appusers ])

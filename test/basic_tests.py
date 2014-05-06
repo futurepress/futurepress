@@ -12,7 +12,7 @@ from flask.ext.stormpath import (
 from application import create_app
 from core import db, TestConfig
 from models import ( Book, Author, Genre, AppUser, stormpathUserHash )
-from test.db_create import bootstrapTestDB
+from test.db_bootstrap import bootstrapTestDB
 
 DATABASE_PATH = TestConfig.DATABASE_PATH
 

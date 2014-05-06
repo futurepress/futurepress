@@ -38,6 +38,7 @@ class Book(db.Model):
     # relationships
     genres = db.relationship('Genre', secondary=genre_relations,
                            backref=db.backref('books', lazy='joined'), lazy='dynamic')
+    # user_books table
 
     # other columns
     title = db.Column(db.String, nullable=False)

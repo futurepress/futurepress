@@ -7,6 +7,7 @@ from flask import (Flask, request, session, g,
                 )
 
 from flask.ext.sqlalchemy import SQLAlchemy
+from migrate.versioning import api
 
 from flask.ext.stormpath import (StormpathManager,
                                 User,
@@ -21,21 +22,20 @@ from settings import basedir
 
 from futurepress import futurepress_blueprints
 from models import ( AppUser, stormpathUserHash )
-from core import db
+from core import db, DevConfig
+
+app = Flask(__name__)
+db.init_app(app)
+
+stormpath_manager = StormpathManager(app)
+stormpath_manager.login_view = 'auth_routes.login'
 
 def create_app(config_object):
 
-    app = Flask(__name__)
     app.config.from_object(config_object)
 
     for blueprint in futurepress_blueprints:
         app.register_blueprint(blueprint)
-
-    db = SQLAlchemy()
-    db.init_app(app)
-
-    stormpath_manager = StormpathManager(app)
-    stormpath_manager.login_view = 'auth_routes.login'
 
     @app.context_processor
     def inject_appuser():
@@ -68,27 +68,7 @@ def create_app(config_object):
 
         return render_template('readers.html')
 
-    return app
-
-
-application = create_app('core.AWSConfig')
-
-from test.db_create import bootstrapTestDB
-if not os.path.isfile("dev.db"):
-    print "dev.db not found, creating..."
-    with application.app_context():
-        db.create_all()
-        bootstrapTestDB(db)
-
 if __name__ == "__main__":
 
-    application = create_app('core.DevConfig')
-
-    from test.db_create import bootstrapTestDB
-    if not os.path.isfile("dev.db"):
-        print "dev.db not found, creating..."
-        with application.app_context():
-            db.create_all()
-            bootstrapTestDB(db)
-
-    application.run()
+    create_app('core.DevConfig')
+    app.run()
