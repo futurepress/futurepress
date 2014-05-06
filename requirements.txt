@@ -7,11 +7,16 @@ Flask-WTF==0.9.4
 Jinja2==2.7.2
 MarkupSafe==0.18
 SQLAlchemy==0.9.3
+Tempita==0.5.2
 Unidecode==0.04.14
 WTForms==1.0.5
 Werkzeug==0.9.4
 boto==2.27.0
+decorator==3.4.0
 itsdangerous==0.23
+pbr==0.8.0
 requests==2.2.1
+six==1.6.1
+sqlalchemy-migrate==0.9.1
 stormpath==1.0.1
 wsgiref==0.1.2
