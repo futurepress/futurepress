@@ -22,7 +22,7 @@ class DevConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_PATH
 
 class AWSConfig(Config):
-    DEBUG = FALSE
+    DEBUG = False
     SECRET_KEY = 'my_precious'
 
     STORMPATH_API_KEY_ID = apiKey_id
