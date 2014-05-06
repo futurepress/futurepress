@@ -4,7 +4,7 @@ from core import db
 from model_utils import stormpathUserHash
 
 user_books = db.Table('user_books',
-    db.Column('book_id', db.String(128), db.ForeignKey('books.book_id')),
+    db.Column('book_id', db.Integer, db.ForeignKey('books.book_id')),
     db.Column('user_id', db.String(128), db.ForeignKey('app_users.user_id'))
 )
 
