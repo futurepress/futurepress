@@ -70,6 +70,16 @@ def create_app(config_object):
 
     return app
 
+
+application = create_app('core.AWSConfig')
+
+from test.db_create import bootstrapTestDB
+if not os.path.isfile("dev.db"):
+    print "dev.db not found, creating..."
+    with application.app_context():
+        db.create_all()
+        bootstrapTestDB(db)
+
 if __name__ == "__main__":
 
     application = create_app('core.DevConfig')

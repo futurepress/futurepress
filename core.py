@@ -21,6 +21,16 @@ class DevConfig(Config):
     DATABASE_PATH = os.path.join(basedir, 'dev.db')
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_PATH
 
+class AWSConfig(Config):
+    DEBUG = FALSE
+    SECRET_KEY = 'my_precious'
+
+    STORMPATH_API_KEY_ID = apiKey_id
+    STORMPATH_API_KEY_SECRET = apiKey_secret
+    STORMPATH_APPLICATION = 'flask-stormpath-sample'
+    DATABASE_PATH = os.path.join(basedir, 'dev.db')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_PATH
+
 class TestConfig(Config):
     DEBUG = True
     SECRET_KEY = 'my_precious'
