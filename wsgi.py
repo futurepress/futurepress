@@ -15,6 +15,3 @@ if not os.path.isfile("aws.db"):
         bootstrapTestDB(db)
 
 application = app
-
-api.upgrade(AWSConfig.SQLALCHEMY_DATABASE_URI, AWSConfig.SQLALCHEMY_MIGRATE_REPO)
-print 'Current database version: ' + str(api.db_version(AWSConfig.SQLALCHEMY_DATABASE_URI, AWSConfig.SQLALCHEMY_MIGRATE_REPO))
