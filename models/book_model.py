@@ -21,8 +21,8 @@ from key import s3access, s3secret
 from settings import S3BUCKET
 
 genre_relations = db.Table('genre_relations',
-    db.Column('genre_id', db.Integer(128), db.ForeignKey('genres.genre_id')),
-    db.Column('book_id', db.Integer(128), db.ForeignKey('books.book_id'))
+    db.Column('genre_id', db.Integer, db.ForeignKey('genres.genre_id')),
+    db.Column('book_id', db.Integer, db.ForeignKey('books.book_id'))
 )
 
 class Book(db.Model):
@@ -30,10 +30,10 @@ class Book(db.Model):
     __tablename__ = 'books'
 
     # primary key
-    book_id = db.Column(db.Integer(128), primary_key=True)
+    book_id = db.Column(db.Integer, primary_key=True)
 
     # foreign key
-    author_id = db.Column(db.Integer(128), db.ForeignKey('author.author_id'))
+    author_id = db.Column(db.Integer, db.ForeignKey('author.author_id'))
 
     # relationships
     genres = db.relationship('Genre', secondary=genre_relations,

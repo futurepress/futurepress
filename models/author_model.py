@@ -13,7 +13,7 @@ class Author(db.Model):
     __tablename__ = 'author'
 
     # primary key
-    author_id = db.Column(db.Integer(128), primary_key=True)
+    author_id = db.Column(db.Integer, primary_key=True)
 
     # relations
     books = db.relationship('Book', backref='author',
