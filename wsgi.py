@@ -12,3 +12,6 @@ create_app('core.AWSConfig')
 #    db.create_all()
 
 application = app
+
+if __name__ == '__main__':
+    application.run()
