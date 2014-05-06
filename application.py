@@ -69,6 +69,5 @@ def create_app(config_object):
         return render_template('readers.html')
 
 if __name__ == "__main__":
-
     create_app('core.DevConfig')
     app.run()
