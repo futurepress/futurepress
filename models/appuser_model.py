@@ -25,6 +25,7 @@ class AppUser(db.Model):
     user_href = db.Column(db.String, nullable=False)
     is_author = db.Column(db.Boolean, nullable=False)
     test_column = db.Column(db.String, nullable=True)
+    test_column2 = db.Column(db.String, nullable=True)
 
     def __init__(self, storm_path_user_href, author=None):
         self.user_id = stormpathUserHash(storm_path_user_href)
@@ -32,6 +33,7 @@ class AppUser(db.Model):
         self.author = author
         self.is_author = True if author is not None else False
         self.test_column = 'Hi!'
+        self.test_column2 = "Hi2!"
 
 
     def __repr__(self):
@@ -42,5 +44,6 @@ class AppUser(db.Model):
             'user_id': self.user_id,
             'user_href': self.user_href,
             'is_author': self.is_author,
-            'test_column': self.test_column
+            'test_column': self.test_column,
+            'test_column2': self.test_column2
         }
