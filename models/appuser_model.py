@@ -24,14 +24,12 @@ class AppUser(db.Model):
     #other columns
     user_href = db.Column(db.String(1024), nullable=False)
     is_author = db.Column(db.Boolean, nullable=False)
-    test_column = db.Column(db.String(1024))
 
     def __init__(self, storm_path_user_href, author=None):
         self.user_id = stormpathUserHash(storm_path_user_href)
         self.user_href = storm_path_user_href
         self.author = author
         self.is_author = True if author is not None else False
-        self.test_column = '1'
 
     def __repr__(self):
         return '<user {}>'.format(self.user_id)
@@ -40,6 +38,5 @@ class AppUser(db.Model):
         return {
             'user_id': self.user_id,
             'user_href': self.user_href,
-            'is_author': self.is_author,
-            'test_column': self.test_column
+            'is_author': self.is_author
         }
