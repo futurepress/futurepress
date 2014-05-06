@@ -13,22 +13,22 @@ class Author(db.Model):
     __tablename__ = 'author'
 
     # primary key
-    author_id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer(128), primary_key=True)
 
     # relations
     books = db.relationship('Book', backref='author',
                             lazy='dynamic')
     # foreign keys
-    user_id = db.Column(db.String, db.ForeignKey('app_users.user_id'))
+    user_id = db.Column(db.String(128), db.ForeignKey('app_users.user_id'))
 
     # other columns
-    name = db.Column(db.String, nullable=False, unique=True)
-    bio = db.Column(db.String, nullable=False)
-    picture = db.Column(db.String, nullable=False)
-    website = db.Column(db.String, nullable=False)
-    blog = db.Column(db.String, nullable=False)
-    twitter_id = db.Column(db.String, nullable=False)
-    slug = db.Column(db.String, nullable=False, unique=True)
+    name = db.Column(db.String(256), nullable=False, unique=True)
+    bio = db.Column(db.String(10000), nullable=False)
+    picture = db.Column(db.String(256), nullable=False)
+    website = db.Column(db.String(256), nullable=False)
+    blog = db.Column(db.String(256), nullable=False)
+    twitter_id = db.Column(db.String(256), nullable=False)
+    slug = db.Column(db.String(256), nullable=False, unique=True)
 
     def __init__(self, name, bio, picture, website, blog, twitter_id):
         self.name = name

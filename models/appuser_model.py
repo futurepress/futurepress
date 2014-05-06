@@ -4,8 +4,8 @@ from core import db
 from model_utils import stormpathUserHash
 
 user_books = db.Table('user_books',
-    db.Column('book_id', db.String, db.ForeignKey('books.book_id')),
-    db.Column('user_id', db.String, db.ForeignKey('app_users.user_id'))
+    db.Column('book_id', db.String(128), db.ForeignKey('books.book_id')),
+    db.Column('user_id', db.String(128), db.ForeignKey('app_users.user_id'))
 )
 
 class AppUser(db.Model):
@@ -13,7 +13,7 @@ class AppUser(db.Model):
     __tablename__ = 'app_users'
 
     # primary key
-    user_id = db.Column(db.String, primary_key=True)
+    user_id = db.Column(db.String(128), primary_key=True)
 
     # relationships
     author = db.relationship('Author', uselist=False, backref='app_user')
@@ -22,7 +22,7 @@ class AppUser(db.Model):
                            backref=db.backref('app_users', lazy='joined'), lazy='dynamic')
 
     #other columns
-    user_href = db.Column(db.String, nullable=False)
+    user_href = db.Column(db.String(1024), nullable=False)
     is_author = db.Column(db.Boolean, nullable=False)
 
     def __init__(self, storm_path_user_href, author=None):

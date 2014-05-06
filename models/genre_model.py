@@ -10,14 +10,14 @@ class Genre(db.Model):
     __tablename__ = 'genres'
 
     # primary key
-    genre_id = db.Column(db.Integer, primary_key=True)
+    genre_id = db.Column(db.Integer(128), primary_key=True)
 
     # relationships
     # genre_relations
 
     # other columns
-    name = db.Column(db.String, nullable=False, unique=True)
-    slug = db.Column(db.String, nullable=False, unique=True)
+    name = db.Column(db.String(128), nullable=False, unique=True)
+    slug = db.Column(db.String(128), nullable=False, unique=True)
 
     def __init__(self, name):
         self.name = name

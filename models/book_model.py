@@ -21,8 +21,8 @@ from key import s3access, s3secret
 from settings import S3BUCKET
 
 genre_relations = db.Table('genre_relations',
-    db.Column('genre_id', db.Integer, db.ForeignKey('genres.genre_id')),
-    db.Column('book_id', db.Integer, db.ForeignKey('books.book_id'))
+    db.Column('genre_id', db.Integer(128), db.ForeignKey('genres.genre_id')),
+    db.Column('book_id', db.Integer(128), db.ForeignKey('books.book_id'))
 )
 
 class Book(db.Model):
@@ -30,10 +30,10 @@ class Book(db.Model):
     __tablename__ = 'books'
 
     # primary key
-    book_id = db.Column(db.Integer, primary_key=True)
+    book_id = db.Column(db.Integer(128), primary_key=True)
 
     # foreign key
-    author_id = db.Column(db.Integer, db.ForeignKey('author.author_id'))
+    author_id = db.Column(db.Integer(128), db.ForeignKey('author.author_id'))
 
     # relationships
     genres = db.relationship('Genre', secondary=genre_relations,
@@ -41,17 +41,17 @@ class Book(db.Model):
     # user_books table
 
     # other columns
-    title = db.Column(db.String, nullable=False)
-    isbn = db.Column(db.String, nullable=False)
-    publisher = db.Column(db.String, nullable=False)
-    cover_large = db.Column(db.String, nullable=False)
-    cover_thumb = db.Column(db.String, nullable=False)
-    slug = db.Column(db.String, nullable=False)
+    title = db.Column(db.String(256), nullable=False)
+    isbn = db.Column(db.String(256), nullable=False)
+    publisher = db.Column(db.String(256), nullable=False)
+    cover_large = db.Column(db.String(256), nullable=False)
+    cover_thumb = db.Column(db.String(256), nullable=False)
+    slug = db.Column(db.String(256), nullable=False)
     last_updated = db.Column(db.Date)
     published = db.Column(db.Date)
-    epub_url = db.Column(db.String, nullable=False)
-    stream_url = db.Column(db.String, nullable=False)
-    atom_entry_url = db.Column(db.String, nullable=False)
+    epub_url = db.Column(db.String(256), nullable=False)
+    stream_url = db.Column(db.String(256), nullable=False)
+    atom_entry_url = db.Column(db.String(256), nullable=False)
 
     def __init__(self, title, isbn, author, publisher, genres, cover_large,
                  cover_thumb, epub_url, stream_url, atom_entry_url):
