@@ -1,7 +1,7 @@
 import imp
 from migrate.versioning import api
 
-from core import DevConfig
+from core import DevConfig, AWSConfig
 from application import db
 
 migration = DevConfig.SQLALCHEMY_MIGRATE_REPO + '/versions/%03d_migration.py' % (api.db_version( DevConfig.SQLALCHEMY_DATABASE_URI,  DevConfig.SQLALCHEMY_MIGRATE_REPO) + 1)
@@ -13,3 +13,7 @@ open(migration, "wt").write(script)
 api.upgrade(DevConfig.SQLALCHEMY_DATABASE_URI, DevConfig.SQLALCHEMY_MIGRATE_REPO)
 print 'New migration saved as ' + migration
 print 'Current database version: ' + str(api.db_version(DevConfig.SQLALCHEMY_DATABASE_URI, DevConfig.SQLALCHEMY_MIGRATE_REPO))
+
+api.upgrade(AWSConfig.SQLALCHEMY_DATABASE_URI, DevConfig.SQLALCHEMY_MIGRATE_REPO)
+print 'New migration saved as ' + migration
+print 'Current database version: ' + str(api.db_version(AWSConfig.SQLALCHEMY_DATABASE_URI, DevConfig.SQLALCHEMY_MIGRATE_REPO))
