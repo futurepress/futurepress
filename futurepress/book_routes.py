@@ -29,8 +29,8 @@ def bookpage(book_id):
             return render_template('bookpage.html', book=book)
     return redirect(url_for('index'))
 
-@login_required
 @book_routes.route('/purchase/<int:book_id>', methods=['POST'])
+@login_required
 def purchase(book_id):
     user_href = user.get_id()
     app_user = AppUser.query.get(stormpathUserHash(user_href))

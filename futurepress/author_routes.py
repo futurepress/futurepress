@@ -32,8 +32,8 @@ def authorpage(author_slug):
             return render_template('authorpage.html', author=author)
     return redirect(url_for('index'))
 
-@login_required
 @author_routes.route('/author_settings/', methods=['GET', 'POST'])
+@login_required
 def settings():
 
     user_id = user.get_id()
@@ -51,8 +51,8 @@ def settings():
     return render_template('author_settings.html', author=app_user.author)
 
 
-@login_required
 @author_routes.route('/dashboard/')
+@login_required
 def author_dashboard():
     user_id = user.get_id()
     app_user = AppUser.query.get(stormpathUserHash(user_id))
@@ -60,8 +60,8 @@ def author_dashboard():
     if app_user.is_author:
         return render_template('author_dashboard.html', author=app_user.author)
 
-@login_required
 @author_routes.route('/dashboard/add', methods=['GET', 'POST'])
+@login_required
 def add_book():
     user_id = user.get_id()
     app_user = AppUser.query.get(stormpathUserHash(user_id))

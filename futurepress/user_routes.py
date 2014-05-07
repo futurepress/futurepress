@@ -21,8 +21,8 @@ from models import ( AppUser, stormpathUserHash )
 user_routes = Blueprint('user_routes', __name__,
                         template_folder='templates')
 
-@login_required
 @user_routes.route('/library', methods=['GET'])
+@login_required
 def library():
     return render_template('user_library.html')
 
@@ -60,8 +60,8 @@ def library_atom(user_id):
     return feed.get_response()
 
 
-@login_required
 @user_routes.route('/settings', methods=['GET', 'POST'])
+@login_required
 def settings():
     if request.method == 'GET':
         return render_template('settings.html')
