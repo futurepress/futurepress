@@ -40,29 +40,34 @@ body {
   padding-right: 15px;
 }
 
+/* line 44, ../sass/screen.scss */
+.nav-dropdown {
+  left: -60px;
+}
+
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 /* Carousel base class */
-/* line 49, ../sass/screen.scss */
+/* line 53, ../sass/screen.scss */
 .carousel {
   height: 500px;
   margin-bottom: 60px;
 }
 
 /* Since positioning the image, we need to help out the caption */
-/* line 54, ../sass/screen.scss */
+/* line 58, ../sass/screen.scss */
 .carousel-caption {
   z-index: 10;
 }
 
 /* Declare heights because of positioning of img element */
-/* line 59, ../sass/screen.scss */
+/* line 63, ../sass/screen.scss */
 .carousel .item {
   height: 500px;
   background-color: #777;
 }
 
-/* line 63, ../sass/screen.scss */
+/* line 67, ../sass/screen.scss */
 .carousel-inner > .item > img {
   position: absolute;
   top: 0;
@@ -74,25 +79,25 @@ body {
 /* MARKETING CONTENT
 -------------------------------------------------- */
 /* Pad the edges of the mobile views a bit */
-/* line 77, ../sass/screen.scss */
+/* line 81, ../sass/screen.scss */
 .marketing {
   padding-left: 15px;
   padding-right: 15px;
 }
 
 /* Center align the text within the three columns below the carousel */
-/* line 83, ../sass/screen.scss */
+/* line 87, ../sass/screen.scss */
 .marketing .col-lg-4 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-/* line 87, ../sass/screen.scss */
+/* line 91, ../sass/screen.scss */
 .marketing h2 {
   font-weight: normal;
 }
 
-/* line 90, ../sass/screen.scss */
+/* line 94, ../sass/screen.scss */
 .marketing .col-lg-4 p {
   margin-left: 10px;
   margin-right: 10px;
@@ -100,14 +105,14 @@ body {
 
 /* Featurettes
 ------------------------- */
-/* line 99, ../sass/screen.scss */
+/* line 103, ../sass/screen.scss */
 .featurette-divider {
   margin: 80px 0;
   /* Space out the Bootstrap <hr> more */
 }
 
 /* Thin out the marketing headings */
-/* line 104, ../sass/screen.scss */
+/* line 108, ../sass/screen.scss */
 .featurette-heading {
   font-weight: 300;
   line-height: 1;
@@ -118,51 +123,51 @@ body {
 -------------------------------------------------- */
 @media (min-width: 768px) {
   /* Remove the edge padding needed for mobile */
-  /* line 118, ../sass/screen.scss */
+  /* line 122, ../sass/screen.scss */
   .marketing {
     padding-left: 0;
     padding-right: 0;
   }
 
   /* Navbar positioning foo */
-  /* line 124, ../sass/screen.scss */
+  /* line 128, ../sass/screen.scss */
   .navbar-wrapper {
     margin-top: 20px;
   }
 
-  /* line 127, ../sass/screen.scss */
+  /* line 131, ../sass/screen.scss */
   .navbar-wrapper .container {
     padding-left: 15px;
     padding-right: 15px;
   }
 
-  /* line 131, ../sass/screen.scss */
+  /* line 135, ../sass/screen.scss */
   .navbar-wrapper .navbar {
     padding-left: 0;
     padding-right: 0;
   }
 
   /* The navbar becomes detached from the top, so we round the corners */
-  /* line 137, ../sass/screen.scss */
+  /* line 141, ../sass/screen.scss */
   .navbar-wrapper .navbar {
     border-radius: 4px;
   }
 
   /* Bump up size of carousel content */
-  /* line 142, ../sass/screen.scss */
+  /* line 146, ../sass/screen.scss */
   .carousel-caption p {
     margin-bottom: 20px;
     font-size: 21px;
     line-height: 1.4;
   }
 
-  /* line 148, ../sass/screen.scss */
+  /* line 152, ../sass/screen.scss */
   .featurette-heading {
     font-size: 50px;
   }
 }
 @media (min-width: 992px) {
-  /* line 155, ../sass/screen.scss */
+  /* line 159, ../sass/screen.scss */
   .featurette-heading {
     margin-top: 120px;
   }
@@ -260,38 +265,38 @@ body {
 /*
  * -- Main Styles --
  */
-/* line 175, ../sass/screen.scss */
+/* line 179, ../sass/screen.scss */
 .topofpage {
   margin-top: 80px;
 }
 
-/* line 179, ../sass/screen.scss */
+/* line 183, ../sass/screen.scss */
 .pull-right {
   float: right !important;
 }
 
-/* line 183, ../sass/screen.scss */
+/* line 187, ../sass/screen.scss */
 .mainmenu {
   margin-right: 15px !important;
 }
 
-/* line 187, ../sass/screen.scss */
+/* line 191, ../sass/screen.scss */
 .cover_thumb {
   max-height: 200px;
   max-width: 200px;
 }
 
-/* line 192, ../sass/screen.scss */
+/* line 196, ../sass/screen.scss */
 .authorbio {
   margin: 8px 4 0 23px;
 }
 
-/* line 196, ../sass/screen.scss */
+/* line 200, ../sass/screen.scss */
 .authorbio .authorphoto {
   margin: 72px 0 0 2px;
 }
 
-/* line 204, ../sass/screen.scss */
+/* line 208, ../sass/screen.scss */
 .booklist li {
   list-style-type: none;
 }
