@@ -10,7 +10,7 @@
             <tbody>
                 {% for book in author.books %}
                 <tr>
-                    <td><img class="cover_thumb" src="/{{book.cover_thumb}}"></td>
+                    <td><img class="cover_thumb" src="{{book.cover_large}}"></td>
                     <td>{{ book.title }}</td>
                     <td>{% for genre in book.genres %}{{genre.name}}, {% endfor %}</td>
                     <td>0</td>
@@ -20,6 +20,8 @@
 
             </tbody>
         </table>
+        <a href="{{ url_for('author_routes.add_book') }}"><button class="btn btn-lg btn-primary" type="submit">Add a Book Listing</button></a>
+
 
     <!-- FOOTER -->
     {% include 'footer.html' %}

@@ -99,11 +99,12 @@ class BookUploader():
     """ Book class
     init with book_file hand an uploaded file
     """
-    def __init__(self, filename, book_file):
+    def __init__(self, filename, book_file, cover_file):
 
         if book_file:
             self.file_dir = self.getFileDir(filename)
-            self.key_name = self.uploadEpubS3(book_file, self.file_dir)
+            self.epub_key = self.uploadEpubS3(book_file, self.file_dir)
+            self.cover_key = self.uploadCoverS3(cover_file, self.file_dir)
             #self.zip_file = self.getZipFile(book_file)
             #self.uploadUnzippedS3(self.zip_file, self.file_dir) ## Only uploads unzipped epub
 
@@ -124,6 +125,22 @@ class BookUploader():
 
         k.set_metadata('Content-Type', 'application/epub+zip')
         k.set_contents_from_string(book_file.read())
+
+        return key_name
+
+    def uploadCoverS3(self, cover_file, file_dir):
+        conn = S3Connection(s3access, s3secret)
+        bucket = conn.get_bucket(S3BUCKET)
+
+        k = Key(bucket)
+
+        key_name = 'covers/' + cover_file.filename
+        k.key = key_name
+
+        file_mime = guess_type(cover_file.filename)[0]
+
+        k.set_metadata('Content-Type', file_mime)
+        k.set_contents_from_string(cover_file.read())
 
         return key_name
 

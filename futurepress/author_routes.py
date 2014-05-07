@@ -71,11 +71,13 @@ def add_book():
             return render_template('add_book.html', author=app_user.author)
 
         book_file = request.files.get('epub_file', None)
+        cover_file = request.files.get('cover_file', None)
 
         # POST is a epub file upload
         if book_file.content_type == 'application/epub+zip' or book_file.content_type == 'application/octet-stream':
-            book_upload = BookUploader(book_file.filename, book_file)
-            epub_url = CLOUDFRONTURL + book_upload.key_name
+            book_upload = BookUploader(book_file.filename, book_file, cover_file)
+            epub_url = CLOUDFRONTURL + book_upload.epub_key
+            cover_url = CLOUDFRONTURL + book_upload.cover_key
 
         # fetch genres too!
         book_data = {
@@ -83,7 +85,8 @@ def add_book():
                       'isbn': request.form.get('isbn'),
                       'title': request.form.get('title'),
                       'publisher': request.form.get('publisher'),
-                      'epub_url': epub_url
+                      'epub_url': epub_url,
+                      'cover_large': cover_url
                       }
 
         book = Book.book_from_dict(**book_data)

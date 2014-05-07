@@ -7,7 +7,8 @@ from flask import (Flask, request, session, g,
                 )
 
 from flask.ext.sqlalchemy import SQLAlchemy
-from migrate.versioning import api
+from flask.ext.script import Manager
+from flask.ext.migrate import Migrate, MigrateCommand
 
 from flask.ext.stormpath import (StormpathManager,
                                 User,
@@ -26,6 +27,11 @@ from core import db, DevConfig
 
 app = Flask(__name__)
 db.init_app(app)
+
+migrate = Migrate(app, db)
+
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
 
 stormpath_manager = StormpathManager(app)
 stormpath_manager.login_view = 'auth_routes.login'
@@ -70,4 +76,4 @@ def create_app(config_object):
 
 if __name__ == "__main__":
     create_app('core.DevConfig')
-    app.run()
+    manager.run()
