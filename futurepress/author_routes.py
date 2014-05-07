@@ -17,7 +17,7 @@ from stormpath.error import Error as StormpathError
 
 # Our Imports
 from core import db
-from models import ( Author, AppUser, Book, BookUploader, stormpathUserHash )
+from models import ( Author, AppUser, Book, BookUploader, Genre, stormpathUserHash )
 from settings import CLOUDFRONTURL
 
 author_routes = Blueprint('author_routes', __name__,
@@ -79,12 +79,22 @@ def add_book():
             epub_url = CLOUDFRONTURL + book_upload.epub_key
             cover_url = CLOUDFRONTURL + book_upload.cover_key
 
-        # fetch genres too!
+        genres = []
+        for g in request.form.get('genres').split(','):
+            genre_name = g.strip().title()
+            if not genre_name.isspace():
+                genre = Genre.query.filter_by(name=genre_name).first()
+                if not genre:
+                    genre = Genre(genre_name)
+                    db.session.add(genre)
+                genres.append(genre)
+
         book_data = {
                       'author': app_user.author,
                       'isbn': request.form.get('isbn'),
                       'title': request.form.get('title'),
                       'publisher': request.form.get('publisher'),
+                      'genres': genres,
                       'epub_url': epub_url,
                       'cover_large': cover_url
                       }
@@ -108,36 +118,23 @@ def edit_book(book_id):
         if request.method == 'GET':
             return render_template('edit_book.html', book=book)
 
-        """
-        # POST
-        book_file = request.files.get('epub_file', None)
-        cover_file = request.files.get('cover_file', None)
-
-        if book_file.content_type == 'application/epub+zip' or book_file.content_type == 'application/octet-stream':
-            book_upload = BookUploader(book_file.filename, book_file, cover_file)
-            epub_url = CLOUDFRONTURL + book_upload.epub_key
-            cover_url = CLOUDFRONTURL + book_upload.cover_key
-        """
-        # fetch genres too!
-        genres = None
-
+        genres = []
         for g in request.form.get('genres').split(','):
-            genre = Genre.query.filter_by(name=g.strip().lower()).first()
-            if not g:
-                db.session.add(Genre(g.strip().lower()))
+            genre_name = g.strip().title()
+            if not genre_name.isspace():
+                genre = Genre.query.filter_by(name=genre_name).first()
+                if not genre:
+                    genre = Genre(genre_name)
+                    db.session.add(genre)
+                genres.append(genre)
 
-        """
-        book_data = {
-                      'isbn': request.form.get('isbn'),
-                      'title': request.form.get('title'),
-                      'publisher': request.form.get('publisher'),
-                      'genres': genres
-                      }
-
-        book = Book.book_from_dict(**book_data)
+        book.genres = genres
+        book.title = request.form.get('title'),
+        book.isbn = request.form.get('isbn'),
+        book.publisher = request.form.get('publisher'),
         db.session.add(book)
+
         db.session.commit()
-        """
 
         return redirect(url_for('author_routes.author_dashboard'))
 

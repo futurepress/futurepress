@@ -16,7 +16,7 @@
         <input id="publisher" name="publisher" type="text" class="form-control" value="{{ book.publisher }}" required>
         <br>
         <h5>Genres - <small>Separate with a comma</small></h5>
-        <input name="genres" type="text" class="form-control" placeholder="Genres" required>
+        <input name="genres" type="text" class="form-control" value="{% for genre in book.genres %}{{genre.name}}, {% endfor %}" required>
         <br>
         {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
         <button class="btn btn-lg btn-primary btn-block" type="submit">List Book</button>
