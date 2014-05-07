@@ -40,6 +40,15 @@ class AppUser(db.Model):
             # TODO flash error message
             db.session.rollback()
 
+    def purchase_book(self, book):
+        self.books.append(book)
+
+        try:
+            db.session.commit()
+        except:
+            # TODO flash error message
+            db.session.rollback()
+
     def __repr__(self):
         return '<user {}>'.format(self.user_id)
 

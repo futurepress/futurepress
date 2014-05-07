@@ -6,8 +6,8 @@ from flask import ( request, session, g,
                     render_template, flash, jsonify,
                     make_response, Blueprint
                 )
+from werkzeug.contrib.atom import AtomFeed, FeedEntry
 from flask.ext.stormpath import (
-                                StormpathManager,
                                 login_required,
                                 user,
                                 User
@@ -21,10 +21,44 @@ from models import ( AppUser, stormpathUserHash )
 user_routes = Blueprint('user_routes', __name__,
                         template_folder='templates')
 
-stormpath_manager = StormpathManager()
-@user_routes.record_once
-def on_load(state):
-    stormpath_manager.init_app(state.app)
+@login_required
+@user_routes.route('/library', methods=['GET'])
+def library():
+    return render_template('user_library.html')
+
+@user_routes.route('/library/<user_id>.atom', methods=['GET'])
+def library_atom(user_id):
+    app_user = AppUser.query.get(user_id)
+
+    feed = AtomFeed('FuturePress Library',
+                    feed_url=request.url,
+                    subtitle="Library for {}".format(user.username))
+
+    books = app_user.books
+    for book in books:
+        feed.add(book.title,
+             author=book.author.as_dict(),
+             id=url_for('book_routes.bookpage',book_id=book.book_id, _external=True),
+             updated=book.last_updated,
+             published=book.published,
+             links=[
+                 {'type': "image/jpeg",
+                  'rel': "http://opds-spec.org/image",
+                  'href': book.cover_large},
+                 {'type': "image/jpeg",
+                  'rel': "http://opds-spec.org/image/thumbnail",
+                  'href': book.cover_thumb},
+                 {'type': "application/epub+zip",
+                  'rel': "http://opds-spec.org/acquisition",
+                  'href': book.epub_url},
+                 {'type': "application/atom+xml;type=entry;profile=opds-catalog",
+                  'rel': "alternate",
+                  'href': url_for('book_routes.bookatom', book_id=book.book_id, _external=True)},
+             ]
+        )
+
+    return feed.get_response()
+
 
 @login_required
 @user_routes.route('/settings', methods=['GET', 'POST'])

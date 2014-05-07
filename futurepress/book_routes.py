@@ -7,9 +7,14 @@ from flask import ( request, session, g,
                     make_response, Blueprint
                 )
 from werkzeug.contrib.atom import AtomFeed, FeedEntry
+from flask.ext.stormpath import (
+                                login_required,
+                                user,
+                                User
+                            )
 
 # Our Imports
-from models import ( Book, Genre )
+from models import ( AppUser, Book, Genre, stormpathUserHash )
 
 
 book_routes = Blueprint('book_routes', __name__,
@@ -23,6 +28,17 @@ def bookpage(book_id):
             #return jsonify(book.as_dict())
             return render_template('bookpage.html', book=book)
     return redirect(url_for('index'))
+
+@login_required
+@book_routes.route('/purchase/<int:book_id>', methods=['POST'])
+def purchase(book_id):
+    user_href = user.get_id()
+    app_user = AppUser.query.get(stormpathUserHash(user_href))
+
+    book = Book.query.get(book_id)
+    app_user.purchase_book(book)
+
+    return redirect(url_for('user_routes.library'))
 
 @book_routes.route('/book/<int:book_id>.atom')
 def bookatom(book_id):

@@ -1,6 +1,6 @@
 import os
 
-from application import app, create_app, db, manager
+from application import app, create_app
 from test.db_bootstrap import bootstrapTestDB
 
 create_app('core.DevConfig')

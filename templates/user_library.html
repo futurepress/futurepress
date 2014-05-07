@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="container topofpage">
+        <div class="row">
+            <div class="col-md-7 col-md-offset-2">
+                <h3 class="form-register-heading">Library</h3>
+                  <div class="row booklist">
+                      <ul>
+                        {% for book in app_user.books %}
+                          {% include 'book_item.html' %}
+                        {% endfor %}
+                      </ul>
+                  </div>
+            </div>
+        </div>
+    <!-- FOOTER -->
+    {% include 'footer.html' %}
+    </div><!-- /container -->
+{% endblock %}

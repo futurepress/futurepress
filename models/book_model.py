@@ -44,6 +44,7 @@ class Book(db.Model):
     title = db.Column(db.String(256), nullable=False)
     isbn = db.Column(db.String(256), nullable=False)
     publisher = db.Column(db.String(256), nullable=False)
+    description = db.Column(db.String(1024))
     cover_large = db.Column(db.String(256), nullable=False)
     cover_thumb = db.Column(db.String(256), nullable=False)
     slug = db.Column(db.String(256), nullable=False)
@@ -53,12 +54,14 @@ class Book(db.Model):
     stream_url = db.Column(db.String(256), nullable=False)
     atom_entry_url = db.Column(db.String(256), nullable=False)
 
-    def __init__(self, title, isbn, author, publisher, genres, cover_large,
-                 cover_thumb, epub_url, stream_url, atom_entry_url):
+    def __init__(self, title, isbn, author, publisher, description,
+                 genres, cover_large, cover_thumb, epub_url, stream_url, atom_entry_url):
+
         self.title = title
         self.isbn = isbn
         self.author = author
         self.publisher = publisher
+        self.description = description
         self.genres = genres
         self.cover_large = cover_large
         self.cover_thumb = cover_thumb
@@ -75,6 +78,7 @@ class Book(db.Model):
                     kwargs.get('isbn', ""),
                     kwargs.get('author', ""),
                     kwargs.get('publisher', ""),
+                    kwargs.get('description', ""),
                     kwargs.get('genres', ""),
                     kwargs.get('cover_large', ""),
                     kwargs.get('cover_thumb', ""),
@@ -90,6 +94,7 @@ class Book(db.Model):
                  'isbn': self.isbn,
                  'author': self.author.as_dict(),
                  'publisher': self.publisher,
+                 'description': self.description,
                  'genres': [ g.as_dict() for g in self.genres ],
                  'slug': self.slug }
 
