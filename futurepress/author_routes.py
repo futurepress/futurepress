@@ -97,3 +97,48 @@ def add_book():
 
     return redirect(url_for('index'))
 
+@author_routes.route('/dashboard/edit/<int:book_id>', methods=['GET', 'POST'])
+@login_required
+def edit_book(book_id):
+    user_id = user.get_id()
+    app_user = AppUser.query.get(stormpathUserHash(user_id))
+    book = Book.query.get(book_id)
+
+    if book in app_user.author.books:
+        if request.method == 'GET':
+            return render_template('edit_book.html', book=book)
+
+        """
+        # POST
+        book_file = request.files.get('epub_file', None)
+        cover_file = request.files.get('cover_file', None)
+
+        if book_file.content_type == 'application/epub+zip' or book_file.content_type == 'application/octet-stream':
+            book_upload = BookUploader(book_file.filename, book_file, cover_file)
+            epub_url = CLOUDFRONTURL + book_upload.epub_key
+            cover_url = CLOUDFRONTURL + book_upload.cover_key
+        """
+        # fetch genres too!
+        genres = None
+
+        for g in request.form.get('genres').split(','):
+            genre = Genre.query.filter_by(name=g.strip().lower()).first()
+            if not g:
+                db.session.add(Genre(g.strip().lower()))
+
+        """
+        book_data = {
+                      'isbn': request.form.get('isbn'),
+                      'title': request.form.get('title'),
+                      'publisher': request.form.get('publisher'),
+                      'genres': genres
+                      }
+
+        book = Book.book_from_dict(**book_data)
+        db.session.add(book)
+        db.session.commit()
+        """
+
+        return redirect(url_for('author_routes.author_dashboard'))
+
+    return redirect(url_for('index'))

@@ -32,7 +32,7 @@ def library_atom(user_id):
 
     feed = AtomFeed('FuturePress Library',
                     feed_url=request.url,
-                    subtitle="Library for {}".format(user.username))
+                    subtitle="Library for {}".format(app_user.user_id))
 
     books = app_user.books
     for book in books:

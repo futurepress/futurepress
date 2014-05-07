@@ -4,22 +4,19 @@
 
     <!-- Begin page content -->
     <div class="container topofpage">
-      <form id="register" action="{{ url_for('author_routes.add_book') }}" method="POST" class="form-register" role="form" enctype="multipart/form-data">
+      <form id="register" action="{{ url_for('author_routes.edit_book',book_id=book.book_id) }}" method="POST" class="form-register" role="form" enctype="multipart/form-data">
         <h3 class="form-register-heading">Add Book</h3>
-        <input name="title" type="text" class="form-control" placeholder="Book Title" required>
+        <label for="title">Title</label>
+        <input id="title" name="title" type="text" class="form-control" value="{{ book.title }}" required>
         <br>
-        <input name="isbn" type="text" class="form-control" placeholder="ISBN" required>
+        <label for="isbn">ISBN</label>
+        <input id="isbn" name="isbn" type="text" class="form-control" value="{{ book.isbn }}" required>
         <br>
-        <input name="publisher" type="text" class="form-control" placeholder="Publisher" required>
+        <label for="publisher">Publisher</label>
+        <input id="publisher" name="publisher" type="text" class="form-control" value="{{ book.publisher }}" required>
         <br>
-        <h4><small>Separate with a comma</small></h4>
+        <h5>Genres - <small>Separate with a comma</small></h5>
         <input name="genres" type="text" class="form-control" placeholder="Genres" required>
-        <br>
-        <label for="cover_file">Cover Image File</label>
-        <input id="cover_file" name="cover_file" type="file" class="form-control" required>
-        <br>
-        <label for="epub_file">Epub File</label>
-        <input id="epub_file" name="epub_file" type="file" class="form-control" required>
         <br>
         {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
         <button class="btn btn-lg btn-primary btn-block" type="submit">List Book</button>

@@ -45,8 +45,6 @@ def register():
 
         return render_template('register.html')
 
-    is_author = True if request.form.get('is_author') is not None else False
-
     try:
         _user = stormpath_manager.application.accounts.create({
             'username': request.form.get('username'),
