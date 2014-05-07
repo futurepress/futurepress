@@ -94,6 +94,7 @@ def add_book():
                       'isbn': request.form.get('isbn'),
                       'title': request.form.get('title'),
                       'publisher': request.form.get('publisher'),
+                      'description': request.form.get('description'),
                       'genres': genres,
                       'epub_url': epub_url,
                       'cover_large': cover_url
@@ -129,9 +130,10 @@ def edit_book(book_id):
                 genres.append(genre)
 
         book.genres = genres
-        book.title = request.form.get('title'),
-        book.isbn = request.form.get('isbn'),
-        book.publisher = request.form.get('publisher'),
+        book.title = request.form.get('title')
+        book.isbn = request.form.get('isbn')
+        book.publisher = request.form.get('publisher')
+        book.description = request.form.get('description')
         db.session.add(book)
 
         db.session.commit()

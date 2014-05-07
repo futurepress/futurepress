@@ -15,6 +15,9 @@
         <label for="publisher">Publisher</label>
         <input id="publisher" name="publisher" type="text" class="form-control" value="{{ book.publisher }}" required>
         <br>
+        <label for="description">Description</label>
+        <textarea id="description" name="description" type="textarea" rows="9" style="width:300px;">{{ book.description }}</textarea>
+        <br>
         <h5>Genres - <small>Separate with a comma</small></h5>
         <input name="genres" type="text" class="form-control" value="{% for genre in book.genres %}{{genre.name}}, {% endfor %}" required>
         <br>
