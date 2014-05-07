@@ -15,7 +15,7 @@
         <input id="picture" name="picture" type="text" class="form-control" value="{{ app_user.author.picture }}" required>
         <br>
         <label for="bio">Bio</label>
-        <textarea id="bio" name="bio" type="textarea" value="{{ app_user.author.bio }}" style="width:300px;"></textarea>
+        <textarea id="bio" name="bio" type="textarea" rows="9" style="width:300px;">{{ app_user.author.bio }}</textarea>
         <br>
         <label for="website">Website</label>
         <input id="website" name="website" type="text" class="form-control" value="{{ app_user.author.website }}" required>
