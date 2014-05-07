@@ -2,7 +2,6 @@
 from migrate.versioning import api
 import os
 
-from core import AWSConfig
 from application import app, create_app, db
 from test.db_bootstrap import bootstrapTestDB
 
