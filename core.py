@@ -19,18 +19,8 @@ class DevConfig(Config):
     STORMPATH_API_KEY_SECRET = apiKey_secret
     STORMPATH_APPLICATION = 'flask-stormpath-sample'
     DATABASE_PATH = os.path.join(basedir, 'dev.db')
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_PATH
-    SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
-
-class AWSConfig(Config):
-    DEBUG = False
-    SECRET_KEY = 'my_precious'
-
-    STORMPATH_API_KEY_ID = apiKey_id
-    STORMPATH_API_KEY_SECRET = apiKey_secret
-    STORMPATH_APPLICATION = 'flask-stormpath-sample'
-    SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
     SQLALCHEMY_DATABASE_URI = 'mysql://aj:Lax4444biking@fp-database.chgwwgc58usa.us-west-1.rds.amazonaws.com:3306/fpdatabase'
+    SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 
 class TestConfig(Config):
     DEBUG = True

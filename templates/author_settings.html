@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <!-- Begin page content -->
+<div class="container topofpage" xmlns="http://www.w3.org/1999/html">
+      <form id="settings" action="{{ url_for('author_routes.settings') }}" method="POST" class="form-register" role="form">
+        <h3 class="form-register-heading">Author Settings</h3>
+        <label for="name">Author Name</label>
+        <input id="name" name="name" type="text" class="form-control" value="{{ app_user.author.name }}" required>
+        <p><a href="{{ url_for('author_routes.authorpage',author_slug=app_user.author.slug) }}">
+            {{ url_for('author_routes.authorpage',author_slug=app_user.author.slug) }}</a></p>
+        <br>
+        <label for="picture">Picture URL</label>
+        <input id="picture" name="picture" type="text" class="form-control" value="{{ app_user.author.picture }}" required>
+        <br>
+        <label for="bio">Bio</label>
+        <textarea id="bio" name="bio" type="textarea" value="{{ app_user.author.bio }}" style="width:300px;"></textarea>
+        <br>
+        <label for="website">Website</label>
+        <input id="website" name="website" type="text" class="form-control" value="{{ app_user.author.website }}" required>
+        <br>
+        <label for="blog">Blog</label>
+        <input id="blog" name="blog" type="text" class="form-control" value="{{ app_user.author.blog }}">
+        <br>
+        <label for="twitter_id">Twitter ID</label>
+        <input id="twitter_id" name="twitter_id" type="text" class="form-control" value="{{ app_user.author.twitter_id }}" >
+        <br>
+        {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Update Settings</button>
+      </form>
+
+    <!-- FOOTER -->
+    {% include 'footer.html' %}
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#register").validate({
+                rules:{
+                    email:{
+                        required: true,
+                        email: true
+                    }
+                    },
+                errorClass: "help-inline"
+                });
+        });
+    </script>
+{% endblock %}

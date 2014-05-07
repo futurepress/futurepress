@@ -33,6 +33,25 @@ def authorpage(author_slug):
     return redirect(url_for('index'))
 
 @login_required
+@author_routes.route('/author_settings/', methods=['GET', 'POST'])
+def settings():
+
+    user_id = user.get_id()
+    app_user = AppUser.query.get(stormpathUserHash(user_id))
+
+    if request.method == 'GET':
+        return render_template('author_settings.html', author=app_user.author)
+
+    if not app_user.is_author:
+        author = Author.author_from_dict(**request.form.to_dict())
+        db.session.add(author)
+        db.session.commit()
+        app_user.become_author(author)
+
+    return render_template('author_settings.html', author=app_user.author)
+
+
+@login_required
 @author_routes.route('/dashboard/')
 def author_dashboard():
     user_id = user.get_id()

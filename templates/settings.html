@@ -16,14 +16,10 @@
         <label for="email">Email</label>
         <input id="email" name="email" type="email" class="form-control" value="{{ user.email }}" required>
         <br>
-        <label class="checkbox">
-          <input name="is_author" type="checkbox" value="is_author"
-            {% if app_user.is_author %}checked>{% else %}> {% endif %} Is Author?
-        </label>
-        <label for="author_name">Author Name</label>
-        <input id="author_name" name="author_name" type="text" class="form-control" value="{{ app_user.author.name }}" required>
-        <p><a href="{{ url_for('author_routes.authorpage',author_slug=app_user.author.slug) }}">
-            {{ url_for('author_routes.authorpage',author_slug=app_user.author.slug) }}</a></p>
+        <a href="{{ url_for('author_routes.settings') }}">
+            <button id="become_author" type="button" class="btn btn-primary" {% if app_user.is_author %}disabled="disabled"{% endif %}>Enable Author</button>
+        </a>
+        <br>
         <br>
         {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
         <button class="btn btn-lg btn-primary btn-block" type="submit">Update Settings</button>

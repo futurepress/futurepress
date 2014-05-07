@@ -51,8 +51,7 @@ def register():
             'email': request.form.get('email'),
             'password': request.form.get('password'),
             'given_name': request.form.get('first_name'),
-            'surname': request.form.get('last_name'),
-            'custom_data': { 'is_author': is_author }
+            'surname': request.form.get('last_name')
         })
         _user.__class__ = User
 

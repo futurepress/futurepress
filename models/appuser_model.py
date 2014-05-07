@@ -25,11 +25,20 @@ class AppUser(db.Model):
     user_href = db.Column(db.String(1024), nullable=False)
     is_author = db.Column(db.Boolean, nullable=False)
 
-    def __init__(self, storm_path_user_href, author=None):
+    def __init__(self, storm_path_user_href):
         self.user_id = stormpathUserHash(storm_path_user_href)
         self.user_href = storm_path_user_href
-        self.author = author
-        self.is_author = True if author is not None else False
+        self.is_author = False
+
+    def become_author(self, Author):
+        self.author = Author
+        self.is_author = True
+
+        try:
+            db.session.commit()
+        except:
+            # TODO flash error message
+            db.session.rollback()
 
     def __repr__(self):
         return '<user {}>'.format(self.user_id)
@@ -38,5 +47,6 @@ class AppUser(db.Model):
         return {
             'user_id': self.user_id,
             'user_href': self.user_href,
-            'is_author': self.is_author
+            'is_author': self.is_author,
+            'author': "" if not self.is_author else self.author.as_dict()
         }

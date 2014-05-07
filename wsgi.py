@@ -6,11 +6,7 @@ from core import AWSConfig
 from application import app, create_app, db
 from test.db_bootstrap import bootstrapTestDB
 
-create_app('core.AWSConfig')
-
-#with app.app_context():
-#    db.create_all()
-
+create_app('core.DevConfig')
 application = app
 
 if __name__ == '__main__':

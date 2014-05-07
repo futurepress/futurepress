@@ -15,9 +15,7 @@
         <br>
         <input id="password" name="password" type="password" class="form-control" placeholder="Password" required>
         <input name="confirm" type="password" class="form-control" placeholder="Confirm Password" required>
-        <label class="checkbox">
-          <input name="is_author" type="checkbox" value="is_author">Is Author?
-        </label>
+        <br>
         {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
         <span class="help-block">Already Registered? <a href="{{ url_for('auth_routes.login') }}">Go Sign In!</a></span>

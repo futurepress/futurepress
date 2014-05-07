@@ -9,11 +9,8 @@ from test.db_bootstrap import bootstrapTestDB
 
 create_app('core.DevConfig')
 
-if not os.path.isfile("dev.db"):
-    print "dev.db not found, creating..."
-    with app.app_context():
-        db.create_all()
-        bootstrapTestDB(db)
+with app.app_context():
+    db.create_all()
 
 if not os.path.exists(DevConfig.SQLALCHEMY_MIGRATE_REPO):
     api.create(DevConfig.SQLALCHEMY_MIGRATE_REPO, 'database repository')
