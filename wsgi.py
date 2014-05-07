@@ -1,8 +1,6 @@
-
-from migrate.versioning import api
 import os
 
-from application import app, create_app, db
+from application import app, create_app, db, manager
 from test.db_bootstrap import bootstrapTestDB
 
 create_app('core.DevConfig')
