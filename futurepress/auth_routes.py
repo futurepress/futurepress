@@ -23,12 +23,13 @@ from core import db
 
 auth_routes = Blueprint('auth_routes', __name__,
                         template_folder='templates')
-"""
+
 stormpath_manager = StormpathManager()
 @auth_routes.record_once
 def on_load(state):
     stormpath_manager.init_app(state.app)
-"""
+    stormpath_manager.login_view = 'auth_routes.login'
+
 
 @auth_routes.route('/register', methods=['GET', 'POST'])
 def register():

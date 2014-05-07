@@ -33,9 +33,6 @@ migrate = Migrate(app, db)
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
-stormpath_manager = StormpathManager(app)
-stormpath_manager.login_view = 'auth_routes.login'
-
 def create_app(config_object):
 
     app.config.from_object(config_object)
