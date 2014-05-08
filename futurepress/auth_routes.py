@@ -104,8 +104,9 @@ def authorize_iOS():
         if app_user.ios_token != t:
             app_user.set_ios_token(t)
         return jsonify({ 'username': user.username,
-                 'authenticated': True,
-                 'ios_token': t
+                         'user_id': app_user.user_id,
+                         'authenticated': True,
+                         'ios_token': t
                 })
     else:
         return jsonify({ 'username': username,
