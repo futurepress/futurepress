@@ -21,11 +21,18 @@
             <a href="{{ url_for('book_routes.books', genre=genre.name) }}">{{ genre.name }}</a>
           {% endfor %}
 
-          <!-- Indicates a successful or positive action -->
+           <br>
+           <br>
            {% if user.is_authenticated() %}
-           <form id="purchase" action="{{ url_for('book_routes.purchase',book_id=book.book_id) }}" method="POST" role="form" enctype="multipart/form-data">
-            <button class="btn btn-success" type="submit">Purchase Book</button>
-           </form>
+               {% if book in app_user.books %}
+                <a href="{{ url_for('book_routes.read',book_id=book.book_id) }}">
+                    <button class="btn btn-success" type="submit">Read Book</button>
+                </a>
+               {% else %}
+               <form id="purchase" action="{{ url_for('book_routes.purchase',book_id=book.book_id) }}" method="POST" role="form" enctype="multipart/form-data">
+                <button class="btn btn-success" type="submit">Purchase Book</button>
+               </form>
+               {% endif %}
            {% else %}
             <a href="{{ url_for('auth_routes.login') }}"<button class="btn btn-success" type="submit">Sign In To Purchase</button></a>
            {% endif %}
