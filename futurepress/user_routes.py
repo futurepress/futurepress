@@ -34,14 +34,14 @@ def library_atom(user_id):
     if app_user.ios_token == token:
 
         feed = AtomFeed('FuturePress Library',
-                        feed_url=request.url,
+                        feed_url=url_for('user_routes.library_atom',user_id=app_user.user_id, _external=True),
                         subtitle="Library for {}".format(app_user.user_id))
 
         books = app_user.books
         for book in books:
             feed.add(book.title,
                  author=book.author.as_dict(),
-                 id=url_for('book_routes.bookpage',book_id=book.book_id, _external=True),
+                 id=book.book_id,
                  updated=book.last_updated,
                  published=book.published,
                  links=[
