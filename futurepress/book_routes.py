@@ -70,7 +70,7 @@ def bookatom(book_id):
     book = Book.query.get(book_id)
     entry = FeedEntry(book.title,
              author=book.author.as_dict(),
-             id=url_for('book_routes.bookpage',book_id=book.book_id, _external=True),
+             id=book.book_id,
              updated=book.last_updated,
              published=book.published,
              links=[
@@ -103,7 +103,7 @@ def catalog():
     for book in books:
         feed.add(book.title,
              author=book.author.as_dict(),
-             id=url_for('book_routes.bookpage',book_id=book.book_id, _external=True),
+             id=book.book_id,
              updated=book.last_updated,
              published=book.published,
              links=[

@@ -6,19 +6,19 @@ from flask import ( request, session, g,
                     render_template, flash, jsonify,
                     make_response, Blueprint
                 )
-
+from flask.ext.login import make_secure_token
 from flask.ext.stormpath import (StormpathManager,
                                 User,
                                 login_required,
                                 login_user,
                                 logout_user,
-                                user,
-                            )
+                                user
+)
 from stormpath.error import Error as StormpathError
 
 
 # Our Imports
-from models import ( AppUser )
+from models import ( AppUser, stormpathUserHash )
 from core import db
 
 auth_routes = Blueprint('auth_routes', __name__,
@@ -84,6 +84,34 @@ def login():
 
     login_user(_user, remember=True)
     return redirect(url_for('index'))
+
+@auth_routes.route('/authorize_ios', methods=['POST'])
+def authorize_iOS():
+    """ User login/auth/session management """
+
+    username = request.form.get('username', '1')
+    password = request.form.get('password', '2')
+    user = None
+
+    try:
+        user = User.from_login(username, password)
+    except StormpathError, err:
+        pass
+
+    if user:
+        app_user = AppUser.query.get(stormpathUserHash(user.get_id()))
+        t = make_secure_token(username + password)
+        if app_user.ios_token != t:
+            app_user.set_ios_token(t)
+        return jsonify({ 'username': user.username,
+                 'authenticated': True,
+                 'ios_token': t
+                })
+    else:
+        return jsonify({ 'username': username,
+                 'authenticated': False,
+                 'ios_token': None
+                })
 
 @auth_routes.route('/logout')
 @login_required

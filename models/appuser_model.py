@@ -24,6 +24,7 @@ class AppUser(db.Model):
     #other columns
     user_href = db.Column(db.String(1024), nullable=False)
     is_author = db.Column(db.Boolean, nullable=False)
+    ios_token = db.Column(db.String(1024))
 
     def __init__(self, storm_path_user_href):
         self.user_id = stormpathUserHash(storm_path_user_href)
@@ -48,6 +49,16 @@ class AppUser(db.Model):
         except:
             # TODO flash error message
             db.session.rollback()
+
+    def set_ios_token(self, ios_token):
+        self.ios_token = ios_token
+
+        try:
+            db.session.commit()
+        except:
+            # TODO flash error message
+            db.session.rollback()
+
 
     def __repr__(self):
         return '<user {}>'.format(self.user_id)
