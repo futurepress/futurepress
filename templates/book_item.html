@@ -4,8 +4,8 @@
     <p>By: <a href="/author/{{ book.author.slug }}">{{ book.author.name }}</a></p>
     <p>Price: {% if book.price %} ${{ book.price }} {% else %} Free! {% endif %}</p>
     <p>Genres: {% for genre in book.genres %}
-        <a href="/genre/{{ genre.slug }}">{{ genre.name }}</a>
+        <a href="{{ url_for('book_routes.books', genre=genre.name) }}">{{ genre.name }}</a>
     {% endfor %}</p>
-   <p><a class="btn btn-default" href="{{ url_for('book_routes.bookpage',book_id=book.book_id) }}" role="button">Read &raquo;</a></p>
+   <p><a class="btn btn-default" href="{{ url_for('book_routes.bookpage',book_id=book.book_id) }}" role="button">More Info &raquo;</a></p>
    <hr class="book_divider">
 </div>

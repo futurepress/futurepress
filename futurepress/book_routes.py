@@ -23,11 +23,19 @@ book_routes = Blueprint('book_routes', __name__,
 @book_routes.route('/books')
 def books():
     title_search = request.args.get('title')
-    if title_search:
-        books = Book.query.filter_by(title=title_search)
+    genre = Genre.query.filter_by(name=request.args.get('genre')).first()
+    books = Book.query.all()
 
-    genre = Genre.query.filter_by(name='Fiction').first()
-    return render_template('genrepage.html', genre=genre)
+    if title_search:
+        books = Book.query.filter(Book.title.like('%'+title_search+'%')).all()
+        return render_template('booklist.html', books=books, search_term=title_search, genre=None)
+
+    if genre:
+        books = [ b for b in books if genre in b.genres ]
+        return render_template('booklist.html', books=books, search_term=None, genre=genre)
+
+    #{{ url_for('book_routes.books', genre=genre.name) }}
+    return render_template('booklist.html', books=books, search_term=None, genre=None)
 
 @book_routes.route('/book/<int:book_id>')
 def bookpage(book_id):
@@ -115,11 +123,3 @@ def catalog():
         )
 
     return feed.get_response()
-
-@book_routes.route('/genre/<genre_slug>')
-def genrepage(genre_slug):
-    if genre_slug:
-        genre = Genre.query.filter_by(slug=genre_slug).first()
-        if genre:
-            return render_template('genrepage.html', genre=genre)
-    return redirect(url_for('index'))

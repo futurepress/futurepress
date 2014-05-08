@@ -18,7 +18,7 @@
           <p>{{ book.description }}</p>
           <h4>Genres</h4>
           {% for genre in book.genres %}
-            <a href="/genre/{{ genre.slug }}">{{ genre.name }}</a>
+            <a href="{{ url_for('book_routes.books', genre=genre.name) }}">{{ genre.name }}</a>
           {% endfor %}
 
           <!-- Indicates a successful or positive action -->
@@ -27,7 +27,7 @@
             <button class="btn btn-success" type="submit">Purchase Book</button>
            </form>
            {% else %}
-            <a href="{{ url_for('auth_routes.register') }}"<button class="btn btn-success" type="submit">Register To Purchase</button></a>
+            <a href="{{ url_for('auth_routes.login') }}"<button class="btn btn-success" type="submit">Sign In To Purchase</button></a>
            {% endif %}
         </div>
       </div>
