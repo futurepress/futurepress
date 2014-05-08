@@ -21,7 +21,13 @@
     <![endif]-->
 
     <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome-ie7.min.css') }}">
+    <![endif]-->
     <link href="{{ url_for('static', filename='css/screen.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
+
     {% if request.endpoint == 'login' or request.endpoint == 'register' %}
       <script src="{{ url_for('static', filename='js/jquery.validate.min.js') }}"></script>
     {% endif %}
@@ -31,8 +37,9 @@
 ================================================== -->
   <body>
 
-    {% include "nav/nav.html" %}
+    {% include "nav/nav2.html" %}
 
+    <section class="details-divider"></section>
     {% block body %}{% endblock %}
 
     <!-- Bootstrap core JavaScript

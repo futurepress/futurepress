@@ -177,7 +177,7 @@ body {
  */
 
  .topofpage {
- 	margin-top: 80px;
+ 	margin-top: 35px;
  }
 
  .pull-right {
@@ -205,6 +205,13 @@ body {
 
  }
 
- .booklist li {
- 	list-style-type: none;
+ .bookitem {
+    margin-bottom: 20px;
+    .cover_thumb {
+        margin-right: 30px;
+    }
+    .book_divider {
+        margin: 35px 0; /* Space out the Bootstrap <hr> more */
+        border-top: 1px solid #D8D1D1;
+    }
  }

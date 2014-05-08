@@ -20,6 +20,15 @@ from models import ( AppUser, Book, Genre, stormpathUserHash )
 book_routes = Blueprint('book_routes', __name__,
                         template_folder='templates')
 
+@book_routes.route('/books')
+def books():
+    title_search = request.args.get('title')
+    if title_search:
+        books = Book.query.filter_by(title=title_search)
+
+    genre = Genre.query.filter_by(name='Fiction').first()
+    return render_template('genrepage.html', genre=genre)
+
 @book_routes.route('/book/<int:book_id>')
 def bookpage(book_id):
     if book_id:

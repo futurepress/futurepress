@@ -1,61 +1,45 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <!-- NOTE: The Front Page should feature user content! -->
-    <!-- Carousel
-    ================================================== -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="item active">
-          <img data-src="holder.js/900x500/auto/#777:#7a7a7a/text:First slide" alt="First slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <!-- This could be a video, when we finish one. --> 
-              <h1>Welcome to the future of publishing</h1>
-              <p>We have a simple idea: <em>Pay people when they add value</em>. In the 21st Century, when jobs are so hard to come by, we should pay people to make art, write a blog, recommend something to a friend, or contribute to internet culture. Enter FUTUREPRESS...
-              </p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">>>>>>CLICK HERE<<<<<</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img data-src="holder.js/900x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Support Writers</h1>
-              <p>Donation models?</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img data-src="holder.js/900x500/auto/#555:#5a5a5a/text:Third slide" alt="Third slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1></h1>
-              <!-- Incentivizing payment. --> 
-              <!-- Also, rewrite this. -->
-              <p></p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-    </div><!-- /.carousel -->
-
-
 
     <!-- Marketing messaging and featurettes
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
+
+       <section id="details" class="details">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="detail">
+              <div class="clearfix">
+                <i class="icon-globe icon-2x pull-left"></i>
+                <h4>Books on any device, any application</h4>
+                    <p>No one owns the idea of a book, but somehow (historical reasons) the word ebook is almost synonymous with the Kindle. FuturePress aims to free books from the prisons of current proprietary formats. We are building a lightweight 100% JavaScript based open source “ereader.” You can read an ebook on any device, or in whatever application you like.</p>
+                    <p><strong>Please try the demo, contribute code, or send us your thoughts.</strong></p>
+              </div>
+<!--               <div class="clearfix">
+                <i class="icon-beaker icon-2x pull-left"></i>
+                <h4>Tested by Developers</h4>
+                <p>Nullam ac magna sit amet odio dignissim elementum eu et arcu. Aliquam pulvinar, justo eu vulputate fermentum, felis lectus.</p>
+              </div>
+              <div class="clearfix">
+                <i class="icon-desktop icon-2x pull-left"></i>
+                <h4>Responsive</h4>
+                <p>Dignissim et dolor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse potenti.</p>
+              </div>
+              <div class="clearfix">
+                <i class="icon-trophy icon-2x pull-left"></i>
+                <h4>Topnotch Design</h4>
+                <p>Integer consequat egestas massa, ac rutrum nunc rutrum vel. Nunc adipiscing suscipit pulvinar.</p>
+              </div> -->
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <img src="{{ url_for('static', filename='img//Alldevices.png') }}" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
 
     <div class="container marketing">
 

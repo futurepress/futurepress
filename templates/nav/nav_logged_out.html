@@ -1,12 +1,8 @@
-<div class="navbar-collapse collapse pull-right mainmenu">
+<div class="navbar-collapse collapse pull-right top-menu">
   <ul class="nav navbar-nav">
-    <li {% if request.endpoint == 'index' %} class='active' {% endif %}><a href="{{ url_for('index') }}">Discover</a></li>
-    <li {% if request.endpoint == 'makers' %} class='active' {% endif %}><a href="{{ url_for('makers') }}">Content makers</a></li>
-    <li {% if request.endpoint == 'readers' %} class='active' {% endif %}><a href="{{ url_for('readers') }}">Readers</a></li>
+    <li {% if request.endpoint == 'index' %} class='active' {% endif %}><a href="{{ url_for('index') }}">Discover Books</a></li>
     <li>
-      <form class="navbar-form">
-        <input type="text" class="form-control" placeholder="Search...">
-      </form>
+        {% include 'nav/search.html' %}
     </li>
     <li><a href="{{ url_for('auth_routes.login') }}">Sign In</a></li>
   </ul>

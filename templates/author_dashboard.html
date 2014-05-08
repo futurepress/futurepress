@@ -14,7 +14,7 @@
                     <td>{{ book.title }}</td>
                     <td>{% for genre in book.genres %}{{genre.name}}, {% endfor %}</td>
                     <td>0</td>
-                    <td><a href="{{ url_for('author_routes.edit_book',book_id=book.book_id) }}">Edit</a></td>
+                    <td><a href="{{ url_for('author_routes.edit_book',book_id=book.book_id) }}"><span class="glyphicon glyphicon-wrench"></span></a></td>
                 </tr>
                 {% endfor %}
 

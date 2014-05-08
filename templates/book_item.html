@@ -1,10 +1,11 @@
-<li class="">
-    <img class="cover_thumb" src="{{book.cover_large}}">
-    <h3 class=""><a href="/book/{{book.book_id}}">{{ book.title }}</a></h3>
+<div class="row bookitem">
+    <a href="{{ url_for('book_routes.bookpage',book_id=book.book_id) }}"><img class="pull-left cover_thumb" {% if book.cover_large %} src="{{book.cover_large}}" {% else %} data-src="holder.js/200x200" {% endif %}></a>
+    <h3 class="">{{ book.title }}</h3>
     <p>By: <a href="/author/{{ book.author.slug }}">{{ book.author.name }}</a></p>
-    <p>Description: {{ book.description }}</p>
-    <p>Price: </p>
+    <p>Price: {% if book.price %} ${{ book.price }} {% else %} Free! {% endif %}</p>
     <p>Genres: {% for genre in book.genres %}
         <a href="/genre/{{ genre.slug }}">{{ genre.name }}</a>
     {% endfor %}</p>
-</li>
+   <p><a class="btn btn-default" href="{{ url_for('book_routes.bookpage',book_id=book.book_id) }}" role="button">Read &raquo;</a></p>
+   <hr class="book_divider">
+</div>
