@@ -29,6 +29,14 @@ def bookpage(book_id):
             return render_template('bookpage.html', book=book)
     return redirect(url_for('index'))
 
+@book_routes.route('/read/<int:book_id>')
+def read(book_id):
+    if book_id:
+        book = Book.query.get(book_id)
+        if book:
+            return render_template('read.html', book=book)
+    return redirect(url_for('index'))
+
 @book_routes.route('/purchase/<int:book_id>', methods=['POST'])
 @login_required
 def purchase(book_id):
