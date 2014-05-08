@@ -89,8 +89,8 @@ def login():
 def authorize_iOS():
     """ User login/auth/session management """
 
-    username = request.form.get('username', '1')
-    password = request.form.get('password', '2')
+    username = request.form.get('username', '')
+    password = request.form.get('password', '')
     user = None
 
     try:

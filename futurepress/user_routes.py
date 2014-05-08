@@ -73,8 +73,6 @@ def settings():
         return render_template('settings.html')
 
     ## handle a POST
-    is_author = True if request.form.get('is_author') is not None else False
-
     try:
         user.username = request.form.get('username')
         user.email = request.form.get('email')
@@ -83,14 +81,6 @@ def settings():
         user.save()
     except StormpathError, err:
         return render_template('settings.html', error=err.message)
-
-    user_id = user.get_id()
-    app_user = AppUser.query.get(stormpathUserHash(user_id))
-
-    if app_user.is_author:
-        author_name = request.form.get('author_name')
-        if author_name != app_user.author.name:
-            app_user.author.update_name(author_name)
 
     return render_template('settings.html')
 

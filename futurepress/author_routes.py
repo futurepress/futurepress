@@ -48,6 +48,15 @@ def settings():
         db.session.commit()
         app_user.become_author(author)
 
+    ## TODO Handle edit author attributes
+    """
+    if app_user.is_author:
+        author_name = request.form.get('author_name')
+        if author_name != app_user.author.name:
+            app_user.author.update_name(author_name)
+    """
+
+
     return render_template('author_settings.html', author=app_user.author)
 
 
