@@ -18,7 +18,7 @@ from stormpath.error import Error as StormpathError
 # Our Imports
 from core import db
 from models import ( Author, AppUser, Book, BookUploader, Genre, stormpathUserHash )
-from settings import CLOUDFRONTURL
+from settings import CLOUDFRONTURL, S3URL
 
 author_routes = Blueprint('author_routes', __name__,
                         template_folder='templates')
@@ -76,7 +76,7 @@ def add_book():
         # POST is a epub file upload
         if book_file.content_type == 'application/epub+zip' or book_file.content_type == 'application/octet-stream':
             book_upload = BookUploader(book_file.filename, book_file, cover_file)
-            epub_url = CLOUDFRONTURL + book_upload.epub_key
+            epub_url = S3URL + 'epubs/' + book_upload.epub_key
             cover_url = CLOUDFRONTURL + book_upload.cover_key
 
         genres = []

@@ -21,12 +21,12 @@
 
             document.onreadystatechange = function () {
               if (document.readyState == "complete") {
-                EPUBJS.filePath = "js/libs/";
-                EPUBJS.cssPath = "css/";
+                EPUBJS.filePath = "/static/js/libs/";
+                EPUBJS.cssPath = "/static/css/";
                 // fileStorage.filePath = EPUBJS.filePath;
 
-                //var reader = ePubReader("{{ book.epub_url }}");
-                var reader = ePubReader("http://s3.amazonaws.com/moby-dick/");
+                var reader = ePubReader("{{ book.epub_url }}");
+                //var reader = ePubReader("https://s3.amazonaws.com/fp-books/epubs/23rdCenturyRomance.epub");
               }
             };
 
