@@ -13,22 +13,17 @@
                 data-src="holder.js/400x400/auto" {% endif %} alt="Generic placeholder image">
         </div>
       </div>
-      
       <hr class="featurette-divider">
 
-      <div class="booklist">
-          <ul>
-            {% for book in author.books %}
-              <li class="">
-                <img class="cover_thumb" src="{{book.cover_large}}">
-                <h3 class=""><a href="/book/{{book.book_id}}">{{ book.title }}</a></h3>
-                <p>Book description. Blah blah, blah..</p>
-                <p>Price</p>
-                <p>Reviews</p>
-                <p>Genres and categories</p>
-              </li>
-            {% endfor %}
-          </ul>
+      <h2>Books by {{ author.name }}</h2>
+      <div class="container">
+          <div class="col-md-11 col-md-offset-1">
+              <div class="row booklist">
+                {% for book in author.books %}
+                    {% include 'book_item.html' %}
+                {% endfor %}
+              </div>
+          </div>
       </div>
 
 <!--       <div class="row press">

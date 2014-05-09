@@ -4,11 +4,20 @@
     <div class="container topofpage">
       <div class="row">
         <div class="col-md-2">
-            <h4>{{ user.username }}'s Library</h4>
+            <h4>Books</h4>
+            {% if search_term %}
+            <h4>Search -  '{{ search_term }}'</h4>
+            {% endif %}
+            {% if genre %}
+            <h4>Genre -  {{ genre.name }}</h4>
+            {% endif %}
         </div>
         <div class="col-md-10">
           <div class="row booklist">
-                {% for book in app_user.books %}
+                {% if not books %}
+                <h2>No Results</h2>
+                {% endif %}
+                {% for book in books %}
                   {% include 'book_item.html' %}
                 {% endfor %}
           </div>

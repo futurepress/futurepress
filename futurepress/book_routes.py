@@ -23,11 +23,19 @@ book_routes = Blueprint('book_routes', __name__,
 @book_routes.route('/books')
 def books():
     title_search = request.args.get('title')
-    if title_search:
-        books = Book.query.filter_by(title=title_search)
+    genre = Genre.query.filter_by(name=request.args.get('genre')).first()
+    books = Book.query.all()
 
-    genre = Genre.query.filter_by(name='Fiction').first()
-    return render_template('genrepage.html', genre=genre)
+    if title_search:
+        books = Book.query.filter(Book.title.like('%'+title_search+'%')).all()
+        return render_template('booklist.html', books=books, search_term=title_search, genre=None)
+
+    if genre:
+        books = [ b for b in books if genre in b.genres ]
+        return render_template('booklist.html', books=books, search_term=None, genre=genre)
+
+    #{{ url_for('book_routes.books', genre=genre.name) }}
+    return render_template('booklist.html', books=books, search_term=None, genre=None)
 
 @book_routes.route('/book/<int:book_id>')
 def bookpage(book_id):
@@ -62,7 +70,7 @@ def bookatom(book_id):
     book = Book.query.get(book_id)
     entry = FeedEntry(book.title,
              author=book.author.as_dict(),
-             id=url_for('book_routes.bookpage',book_id=book.book_id, _external=True),
+             id=book.book_id,
              updated=book.last_updated,
              published=book.published,
              links=[
@@ -71,7 +79,7 @@ def bookatom(book_id):
                   'href': book.cover_large},
                  {'type': "image/jpeg",
                   'rel': "http://opds-spec.org/image/thumbnail",
-                  'href': book.cover_thumb},
+                  'href': book.cover_large},
                  {'type': "application/epub+zip",
                   'rel': "http://opds-spec.org/acquisition",
                   'href': book.epub_url},
@@ -95,7 +103,7 @@ def catalog():
     for book in books:
         feed.add(book.title,
              author=book.author.as_dict(),
-             id=url_for('book_routes.bookpage',book_id=book.book_id, _external=True),
+             id=book.book_id,
              updated=book.last_updated,
              published=book.published,
              links=[
@@ -104,7 +112,7 @@ def catalog():
                   'href': book.cover_large},
                  {'type': "image/jpeg",
                   'rel': "http://opds-spec.org/image/thumbnail",
-                  'href': book.cover_thumb},
+                  'href': book.cover_large},
                  {'type': "application/epub+zip",
                   'rel': "http://opds-spec.org/acquisition",
                   'href': book.epub_url},
@@ -115,11 +123,3 @@ def catalog():
         )
 
     return feed.get_response()
-
-@book_routes.route('/genre/<genre_slug>')
-def genrepage(genre_slug):
-    if genre_slug:
-        genre = Genre.query.filter_by(slug=genre_slug).first()
-        if genre:
-            return render_template('genrepage.html', genre=genre)
-    return redirect(url_for('index'))

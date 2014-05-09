@@ -29,35 +29,41 @@ def library():
 @user_routes.route('/library/<user_id>.atom', methods=['GET'])
 def library_atom(user_id):
     app_user = AppUser.query.get(user_id)
+    token = request.args.get('token', '')
 
-    feed = AtomFeed('FuturePress Library',
-                    feed_url=request.url,
-                    subtitle="Library for {}".format(app_user.user_id))
+    if app_user.ios_token == token:
 
-    books = app_user.books
-    for book in books:
-        feed.add(book.title,
-             author=book.author.as_dict(),
-             id=url_for('book_routes.bookpage',book_id=book.book_id, _external=True),
-             updated=book.last_updated,
-             published=book.published,
-             links=[
-                 {'type': "image/jpeg",
-                  'rel': "http://opds-spec.org/image",
-                  'href': book.cover_large},
-                 {'type': "image/jpeg",
-                  'rel': "http://opds-spec.org/image/thumbnail",
-                  'href': book.cover_thumb},
-                 {'type': "application/epub+zip",
-                  'rel': "http://opds-spec.org/acquisition",
-                  'href': book.epub_url},
-                 {'type': "application/atom+xml;type=entry;profile=opds-catalog",
-                  'rel': "alternate",
-                  'href': url_for('book_routes.bookatom', book_id=book.book_id, _external=True)},
-             ]
-        )
+        feed = AtomFeed('FuturePress Library',
+                        feed_url=url_for('user_routes.library_atom',user_id=app_user.user_id, _external=True),
+                        subtitle="Library for {}".format(app_user.user_id))
 
-    return feed.get_response()
+        books = app_user.books
+        for book in books:
+            feed.add(book.title,
+                 author=book.author.as_dict(),
+                 id=book.book_id,
+                 updated=book.last_updated,
+                 published=book.published,
+                 links=[
+                     {'type': "image/jpeg",
+                      'rel': "http://opds-spec.org/image",
+                      'href': book.cover_large},
+                     {'type': "image/jpeg",
+                      'rel': "http://opds-spec.org/image/thumbnail",
+                      'href': book.cover_large},
+                     {'type': "application/epub+zip",
+                      'rel': "http://opds-spec.org/acquisition",
+                      'href': book.epub_url},
+                     {'type': "application/atom+xml;type=entry;profile=opds-catalog",
+                      'rel': "alternate",
+                      'href': url_for('book_routes.bookatom', book_id=book.book_id, _external=True)},
+                 ]
+            )
+
+        return feed.get_response()
+
+    return render_template('error.html'), 404
+
 
 
 @user_routes.route('/settings', methods=['GET', 'POST'])
@@ -67,8 +73,6 @@ def settings():
         return render_template('settings.html')
 
     ## handle a POST
-    is_author = True if request.form.get('is_author') is not None else False
-
     try:
         user.username = request.form.get('username')
         user.email = request.form.get('email')
@@ -77,14 +81,6 @@ def settings():
         user.save()
     except StormpathError, err:
         return render_template('settings.html', error=err.message)
-
-    user_id = user.get_id()
-    app_user = AppUser.query.get(stormpathUserHash(user_id))
-
-    if app_user.is_author:
-        author_name = request.form.get('author_name')
-        if author_name != app_user.author.name:
-            app_user.author.update_name(author_name)
 
     return render_template('settings.html')
 

@@ -1,7 +1,7 @@
 <div class="navbar-collapse collapse pull-right top-menu">
   <ul class="nav navbar-nav">
     <li><a href="https://github.com/futurepress">GitHub</a></li>
-    <li {% if request.endpoint == 'index' %} class='active' {% endif %}><a href="{{ url_for('index') }}">Discover Books</a></li>
+    <li {% if request.endpoint == 'book_routes.books' %} class='active' {% endif %}><a href="{{ url_for('book_routes.books') }}">Discover Books</a></li>
     {% if app_user.is_author %}
     <li{% if request.endpoint == 'author_routes.author_dashboard' %} class='active' {% endif %}><a href="{{ url_for('author_routes.author_dashboard') }}">Author Dashboard</a></li>
     {% endif %}
