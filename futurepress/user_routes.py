@@ -50,7 +50,7 @@ def library_atom(user_id):
                       'href': book.cover_large},
                      {'type': "image/jpeg",
                       'rel': "http://opds-spec.org/image/thumbnail",
-                      'href': book.cover_thumb},
+                      'href': book.cover_large},
                      {'type': "application/epub+zip",
                       'rel': "http://opds-spec.org/acquisition",
                       'href': book.epub_url},
