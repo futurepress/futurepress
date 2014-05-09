@@ -13,54 +13,60 @@
             <div class="detail">
               <div class="clearfix">
                 <i class="icon-globe icon-2x pull-left"></i>
-                <h4>Books on any device, any application</h4>
-                    <p>No one owns the idea of a book, but somehow (historical reasons) the word ebook is almost synonymous with the Kindle. FuturePress aims to free books from the prisons of current proprietary formats. We are building a lightweight 100% JavaScript based open source “ereader.” You can read an ebook on any device, or in whatever application you like.</p>
-                    <p><strong>Please try the demo, contribute code, or send us your thoughts.</strong></p>
+                <h4>The Future of Books = the Web</h4>
+                    <p>No one owns the idea of a book, but somehow (historical reasons) the word ebook is almost synonymous with the Kindle.</p>
+                    <p></p>
+                    <p>FuturePress aims to free content from the prisons of current proprietary formats through building awesome open source technology and utilizing powerful web standards. All our code is licensed under the incredibly permissive Free BSD license.</p>
+<!--                     <p>This paper offers a vision of digital book distribution based on open web standards, shows solutions implementing these standards, and discusses the possibilities such technological stacks can enable. The World Wide Web Consortium (W3C) has championed open standards to create a content publishing system that is extensible, configurable, and compatible across browsers, applications and devices. We argue digital books should be built with and distributed by these same open standards. We discuss how “books as web resources” will bring a number of efficiencies, new affordances, and benefits for multiple stakeholders in the information economy. The benefits discussed include open annotation, linking inside of books, interoperability, decentralized distribution, and syndication. We present a technology stack built on these standards, and offer a use case showing how this architecture can be used to support new ways of creating, distributing, and monetizing content.</p> -->
+                    <p>
+                      <a class="btn btn-default" href="https://github.com/futurepress" role="button">Checkout our GitHub Page!</a>
+                      <a class="btn btn-default" href="#" role="button">Start Reading!</a>
+                    </p>
               </div>
-<!--               <div class="clearfix">
-                <i class="icon-beaker icon-2x pull-left"></i>
-                <h4>Tested by Developers</h4>
-                <p>Nullam ac magna sit amet odio dignissim elementum eu et arcu. Aliquam pulvinar, justo eu vulputate fermentum, felis lectus.</p>
-              </div>
-              <div class="clearfix">
-                <i class="icon-desktop icon-2x pull-left"></i>
-                <h4>Responsive</h4>
-                <p>Dignissim et dolor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse potenti.</p>
-              </div>
-              <div class="clearfix">
-                <i class="icon-trophy icon-2x pull-left"></i>
-                <h4>Topnotch Design</h4>
-                <p>Integer consequat egestas massa, ac rutrum nunc rutrum vel. Nunc adipiscing suscipit pulvinar.</p>
-              </div> -->
             </div>
           </div>
-          <div class="col-lg-6">
+<!--           <div class="col-lg-6">
             <img src="{{ url_for('static', filename='img//Alldevices.png') }}" alt="">
+          </div> -->
+          <div class="testimonials">
+            <div class="col-lg-6">
+              <blockquote>
+                <div>
+                  <i class="icon-quote-left icon-3x"></i>
+                  <p>The future of eBooks is not in the production of digital photocopies 
+                  you can read by the pool. The future of eBooks lies in re-imagining the 
+                  book as an open, easily accessible, immersive experience; a connected 
+                  community of discovery. </p>
+                  <small>Scott Abel <cite title="Source Title">The Content Wrangler</cite></small>
+                </div>
+              </blockquote>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <div class="container marketing">
-
+      <h2>Our 100% Open Source Solutions:</h2>
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
           <img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
-          <h2>More money to people, not corporations</h2>
-          <p>Apple and Amazon take 30% for themselves of each purchase, but we redistribute to people who help spread the word about books: reviewers, developers, and readers.</p>
+          <h2>Epub.js</h2>
+          <p>Epub.js contains a flexible rendering engine and provides a simple interface for common ebook functions such as styling, persistence and pagination.</p>
+          <p><a class="btn btn-default" href="#Epubjs" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
+          <h2>OPDS Catalogue Server</h2>
+          <p>FuturePress is a python server that enables distribution of Epubs as web resources through publishing a feed of available books using <a href="">OPDS catalogs</a>.</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
-          <h2>Open Source</h2>
-          <p>We are an open source company</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
-          <h2>Rethinking Publishing</h2>
-          <p>We aim to create not a platform, but a publishing Ecosystem in which more people in the content industry can benefit.</p>
+          <h2>Reader</h2>
+          <p>An Epub.js reference implementation with robust linking, annotations, endnotes, footnotes, search, reading position, bookmarks, nested table of contents, transclusions, embedded interactive content and more. 
+          </p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
@@ -70,13 +76,13 @@
 
       <hr class="featurette-divider">
 
-      <div class="row featurette">
+      <div id="Epubjs" class="row featurette">
         <div class="col-md-7">
           <h2 class="featurette-heading">Read on any device<span class="text-muted">Anywhere</span></h2>
-          <p class="lead">With Futurepress there is no device lock in. Our technologies are all open source and based on open standards. Any device that supports epub or a modern browser will work. If you want to export your library you can.</p>
+          <p class="lead">Any device that supports a modern browser will work. It doesn't matter if it's an iOS, OSX, Android, Linux, Windows 8, etc. For offline reading it is easy to enable download of the Epub file or using the browsers local storage for those times in the subway.</p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img class="featurette-image img-responsive" src="{{ url_for('static', filename='img//Alldevices.png') }}" width="500px" height="500px" alt="A picture of the same book on a tablet, phone, and laptop.">
         </div>
       </div>
 
@@ -87,12 +93,85 @@
           <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
         </div>
         <div class="col-md-7">
-          <h2 class="featurette-heading">Sell anywhere.<span class="text-muted">Checkmate.</span></h2>
-          <p class="lead">Make money for selling. Whether you're a music blogger or <em>The New York Times</em>, we give you <strong>30%</strong> commission for a sale that comes from your site.</p>
+          <h2 class="featurette-heading">Powerful<span class="text-muted"> Documents</span></h2>
+          <p class="lead">Imagined an easily-authored web-based document that could easily be turned into a website just by being hosted! Well, you don't have to imagine. It's called Epub. The goal of Epub.js is to give developers an important tool they need to work with this wonderful packaged document, and to someday hopefully lead to native browser support for Epub.</p>
         </div>
       </div>
-      <!-- /END THE FEATURETTES -->
 
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Decentralized<span class="text-muted"> Distribution</span></h2>
+          <p class="lead">By publishing with the open standards Epub and OPDS, authors can take part in decentralized distribution where a book listing on their own server can support an unlimited number of listings in other locations or with larger distributors. For example, a book review on a personal blog might embed the author’s book into the review, allowing the review reader to sample different sections of the text, as well as acting as an additional distribution point. In another example, ebook retailers, such as Feedbooks, can act as aggregators of content while the book listing itself is sourced from the author’s own server.</p>
+        </div>
+        <div class="testimonials">
+          <div class="col-md-4">
+            <blockquote>
+              <div>
+                <i class="icon-quote-left icon-3x"></i>
+                <p>Ebooks belong on the web. This technology has the potential to give more power and flexibility to authors, developers, and publishers. No longer will we be chained up at the mercy of Apple and Amazon.</p>
+                <small>Marguerite Avery <cite title="Source Title">MIT Press</cite></small>
+              </div>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+      </div>
+      <hr class="featurette-divider">
+
+
+      <!-- /END THE FEATURETTES -->
+<!--       <hr class="featurette-divider">
+
+      <section id="testimonials" class="testimonials">
+      <div class="container">
+        <div class="row-fluid">
+          <div class="col-md-4">
+            <blockquote>
+              <div>
+                <i class="icon-quote-left icon-3x"></i>
+                <p>The future of eBooks is not in the production of digital photocopies 
+                you can read by the pool. The future of eBooks lies in re-imagining the 
+                book as an open, easily accessible, immersive experience; a connected 
+                community of discovery. </p>
+                <small>Scott Abel <cite title="Source Title">The Content Wrangler</cite></small>
+              </div>
+            </blockquote>
+          </div>
+          <div class="col-md-4">
+            <blockquote>
+              <div>
+                <i class="icon-quote-left icon-3x"></i>
+                <p>Books should be made using open web standards like HTML5. Imagine what we can do when we allow books to be web resources! Everything we can do on the web, we can do here! It's so obvious!</p>
+                <small>Fred Chasen <cite title="Source Title">Lead FuturePress Developer</cite></small>
+              </div>
+            </blockquote>
+          </div>
+          <div class="col-md-4">
+            <blockquote>
+              <div>
+                <i class="icon-quote-left icon-3x"></i>
+                <p>Ebooks belong on the web. This technology has the potential to give more power and flexibility to authors, developers, and publishers. No longer will we be chained up at the mercy of Apple and Amazon.</p>
+                <small>Marguerite Avery <cite title="Source Title">MIT Press</cite></small>
+              </div>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    
+    
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="row">
+          <h2>Feedback &amp; Questions</h2>
+          <p>We'd love to hear from you—especially if you want to contribute to the project, or are interested in making publishing more standardized and open. Please join our <a href="https://groups.google.com/forum/#!forum/epubjs">mailing list</a> or hang out with us on IRC freenode.net Channel: #epub.js</p>
+          <p>Epub is a registered trademark of the <a href="http://idpf.org/">IDPF</a>.</p>
+        </div>
+      </div>
+      </section>
+    
     <!-- FOOTER -->
     {% include 'footer.html' %}
 
