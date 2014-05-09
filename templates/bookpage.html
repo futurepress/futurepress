@@ -30,7 +30,7 @@
                 </a>
                {% else %}
                <form id="purchase" action="{{ url_for('book_routes.purchase',book_id=book.book_id) }}" method="POST" role="form" enctype="multipart/form-data">
-                <button class="btn btn-success" type="submit">Purchase Book</button>
+                <button class="btn btn-success" type="submit">Add to Library</button>
                </form>
                {% endif %}
            {% else %}
