@@ -51,19 +51,19 @@
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
-          <img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
+          <img class="img-circle" data-src="{{ url_for('static', filename='img/whyepub.png') }}" alt="Epub.js">
           <h2>Epub.js</h2>
           <p>Epub.js contains a flexible rendering engine and provides a simple interface for common ebook functions such as styling, persistence and pagination.</p>
           <p><a class="btn btn-default" href="#Epubjs" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
+          <img class="img-circle" data-src="{{ url_for('static', filename='img/opdslogo.png') }}" alt="opds logo">
           <h2>OPDS Catalogue Server</h2>
           <p>FuturePress is a python server that enables distribution of Epubs as web resources through publishing a feed of available books using <a href="">OPDS catalogs</a>.</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
+          <img class="img-circle" data-src="{{ url_for('static', filename='img/fp.png') }}" alt="reader">
           <h2>Reader</h2>
           <p>An Epub.js reference implementation with robust linking, annotations, endnotes, footnotes, search, reading position, bookmarks, nested table of contents, transclusions, embedded interactive content and more. 
           </p>
@@ -82,7 +82,7 @@
           <p class="lead">Any device that supports a modern browser will work. It doesn't matter if it's an iOS, OSX, Android, Linux, Windows 8, etc. For offline reading it is easy to enable download of the Epub file or using the browsers local storage for those times in the subway.</p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-responsive" src="{{ url_for('static', filename='img//Alldevices.png') }}" width="500px" height="500px" alt="A picture of the same book on a tablet, phone, and laptop.">
+          <img class="featurette-image img-responsive" src="{{ url_for('static', filename='img/multiscreen.png') }}" width="500px" height="500px" alt="A picture of the same book on a tablet, phone, and laptop.">
         </div>
       </div>
 
@@ -90,10 +90,10 @@
 
       <div class="row featurette">
         <div class="col-md-5">
-          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img class="featurette-image img-responsive" data-src="{{ url_for('static', filename='img/epub_logo_color.jpg') }}" alt="epub">
         </div>
         <div class="col-md-7">
-          <h2 class="featurette-heading">Powerful<span class="text-muted"> Documents</span></h2>
+          <h2 class="featurette-heading">Powerful<span class="text-muted">Documents</span></h2>
           <p class="lead">Imagined an easily-authored web-based document that could easily be turned into a website just by being hosted! Well, you don't have to imagine. It's called Epub. The goal of Epub.js is to give developers an important tool they need to work with this wonderful packaged document, and to someday hopefully lead to native browser support for Epub.</p>
         </div>
       </div>
@@ -102,7 +102,7 @@
 
       <div class="row featurette">
         <div class="col-md-7">
-          <h2 class="featurette-heading">Decentralized<span class="text-muted"> Distribution</span></h2>
+          <h2 class="featurette-heading">Decentralized<span class="text-muted">Distribution</span></h2>
           <p class="lead">By publishing with the open standards Epub and OPDS, authors can take part in decentralized distribution where a book listing on their own server can support an unlimited number of listings in other locations or with larger distributors. For example, a book review on a personal blog might embed the author’s book into the review, allowing the review reader to sample different sections of the text, as well as acting as an additional distribution point. In another example, ebook retailers, such as Feedbooks, can act as aggregators of content while the book listing itself is sourced from the author’s own server.</p>
         </div>
         <div class="testimonials">

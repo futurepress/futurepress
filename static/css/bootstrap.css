@@ -496,6 +496,7 @@ cite {
 }
 .text-muted {
   color: #999;
+  margin-left: 12px;
 }
 .text-primary {
   color: #428bca;
