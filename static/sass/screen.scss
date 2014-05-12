@@ -94,6 +94,7 @@ body {
 .marketing .col-lg-4 p {
   margin-left: 10px;
   margin-right: 10px;
+  text-align: left;
 }
 
 
@@ -186,6 +187,23 @@ body {
 
  .mainmenu {
  	margin-right: 15px !important;
+ }
+
+ .second-line {
+   .featurette-heading {
+        margin-top: 35px;
+    }
+    h2 {
+        margin-bottom: 25px;
+    }
+    .second-line-item {
+        height: 300px;
+    }
+    .btn {
+            position: absolute;
+            bottom: 0px;
+            margin: 0 auto;
+    }
  }
 
  .cover_thumb {
